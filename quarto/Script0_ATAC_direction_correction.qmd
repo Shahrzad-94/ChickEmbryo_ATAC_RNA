@@ -1,0 +1,247 @@
+\-\--
+
+title: "Script 0: ATAC-seq Fold Change Direction Correction"
+
+subtitle: "Chicken Embryo Antagomir Study --- ATAC-seq + RNA-seq Integration Pipeline"
+
+author:
+
+ - name: Shahrzad Moradi Fard
+
+email: shahrzadmf94\@gmail.com
+
+affiliation: University of East Anglia
+
+date: today
+
+date-format: "DD MMMM YYYY"
+
+format:
+
+html:
+
+toc: true
+
+toc-depth: 3
+
+toc-title: "Contents"
+
+number-sections: true
+
+theme: flatly
+
+code-fold: true
+
+code-summary: "Show code"
+
+self-contained: true
+
+execute:
+
+echo: true
+
+warning: false
+
+message: false
+
+eval: false
+
+\-\--
+
+\## Overview
+
+This document describes Script 0 of the ATAC-seq and RNA-seq integration
+
+pipeline for the chicken embryo antagomir study. Script 0 corrects the fold
+
+change direction in the six raw DiffBind ATAC-seq output files, standardises
+
+column names to DESeq2 convention, and saves both full corrected and
+
+significance-filtered versions for downstream analysis.
+
+\### The problem
+
+DiffBind calculates \`Fold\` as log2(Group2/Group1) --- where Group2 is the
+
+second-named group in the filename --- instead of the expected
+
+log2(Group1/Group2). This means that for a file named
+
+\`DEseq2_AM133_v_AMScr.tsv\`, a positive \`Fold\` value indicates greater
+
+chromatin accessibility in AMScr (Group2), not AM133 (Group1). If used
+
+uncorrected, all concordance classifications in the integration step would
+
+be biologically reversed.
+
+\### The solution
+
+Five of the six files are corrected by multiplying \`Fold\` by -1. The sixth
+
+file (\`DEseq2_AM1_206_v_AM133.tsv\`) already has the correct direction ---
+
+positive \`Fold\` means higher accessibility in AM133 --- which matches the
+
+corresponding RNA-seq file (\`AM133vsAM1_206_deg_all.tsv\`). This file is
+
+renamed only, to reflect its true biological direction.
+
+\### Column standardisation
+
+All six files have columns renamed to match DESeq2 convention:
+
+\| Original name \| New name \| Reason \|
+
+\|\-\--\|\-\--\|\-\--\|
+
+\| \`Fold\` \| \`log2FoldChange\` \| Standard DESeq2 naming \|
+
+\| \`FDR\` \| \`padj\` \| Standard adjusted p-value name \|
+
+\| \`p-value\` \| \`pvalue\` \| Removes hyphen to avoid R syntax issues \|
+
+\## Inputs
+
+\| File \| Location \|
+
+\|\-\--\|\-\--\|
+
+\| DEseq2_AM133_v_AMScr.tsv \| data/raw/atac/deseq2/ \|
+
+\| DEseq2_AMAll_v_AMScr.tsv \| data/raw/atac/deseq2/ \|
+
+\| DEseq2_AM1_206_v_AMScr.tsv \| data/raw/atac/deseq2/ \|
+
+\| DEseq2_AM1_206_v_AM133.tsv \| data/raw/atac/deseq2/ \|
+
+\| DEseq2_AM133_v_AMAll.tsv \| data/raw/atac/deseq2/ \|
+
+\| DEseq2_AM1_206_v_AMAll.tsv \| data/raw/atac/deseq2/ \|
+
+\## Outputs
+
+\| File \| Location \| Description \|
+
+\|\-\--\|\-\--\|\-\--\|
+
+\| AM133_vs_AMScr_atac.tsv \| data/processed/atac/deseq2/ \| Full corrected file \|
+
+\| AMAll_vs_AMScr_atac.tsv \| data/processed/atac/deseq2/ \| Full corrected file \|
+
+\| AM1_206_vs_AMScr_atac.tsv \| data/processed/atac/deseq2/ \| Full corrected file \|
+
+\| AM133_vs_AM1_206_atac.tsv \| data/processed/atac/deseq2/ \| Renamed only \|
+
+\| AM133_vs_AMAll_atac.tsv \| data/processed/atac/deseq2/ \| Full corrected file \|
+
+\| AM1_206_vs_AMAll_atac.tsv \| data/processed/atac/deseq2/ \| Full corrected file \|
+
+\| AM133_vs_AMScr_atac_padj0.05.tsv \| data/processed/atac/deseq2_filtered/ \| padj \<= 0.05 \|
+
+\| AMAll_vs_AMScr_atac_padj0.05.tsv \| data/processed/atac/deseq2_filtered/ \| padj \<= 0.05 \|
+
+\| AM1_206_vs_AMScr_atac_padj0.05.tsv \| data/processed/atac/deseq2_filtered/ \| padj \<= 0.05 \|
+
+\| AM133_vs_AM1_206_atac_padj0.05.tsv \| data/processed/atac/deseq2_filtered/ \| padj \<= 0.05 \|
+
+\| AM133_vs_AMAll_atac_padj0.05.tsv \| data/processed/atac/deseq2_filtered/ \| padj \<= 0.05 \|
+
+\| AM1_206_vs_AMAll_atac_padj0.05.tsv \| data/processed/atac/deseq2_filtered/ \| padj \<= 0.05 \|
+
+\## Results
+
+\### Correction summary
+
+\| Comparison \| Action \| Total peaks \| Significant (padj \<= 0.05) \| % \|
+
+\|\-\--\|\-\--\|\-\--\|\-\--\|\-\--\|
+
+\| AM133_vs_AMScr \| Flipped + renamed \| 93,678 \| 10,652 \| 11.4% \|
+
+\| AMAll_vs_AMScr \| Flipped + renamed \| 92,751 \| 13,388 \| 14.4% \|
+
+\| AM1_206_vs_AMScr \| Flipped + renamed \| 95,911 \| 132 \| 0.1% \|
+
+\| AM133_vs_AM1_206 \| Renamed only \| 79,564 \| 1,969 \| 2.5% \|
+
+\| AM133_vs_AMAll \| Flipped + renamed \| 71,670 \| 9 \| 0.0% \|
+
+\| AM1_206_vs_AMAll \| Flipped + renamed \| 78,038 \| 6,685 \| 8.6% \|
+
+\### Meaning of positive log2FoldChange after correction
+
+\| Comparison \| Positive log2FoldChange means \|
+
+\|\-\--\|\-\--\|
+
+\| AM133_vs_AMScr \| More open in AM133 \|
+
+\| AMAll_vs_AMScr \| More open in AMAll \|
+
+\| AM1_206_vs_AMScr \| More open in AM1/206 \|
+
+\| AM133_vs_AM1_206 \| More open in AM133 \|
+
+\| AM133_vs_AMAll \| More open in AM133 \|
+
+\| AM1_206_vs_AMAll \| More open in AM1/206 \|
+
+\### Verification
+
+All six files were verified before and after correction using the \`Conc\`
+
+columns as ground truth. For each file, a test peak was identified where
+
+the first-named group had at least 2x higher mean chromatin accessibility
+
+concentration than the second-named group. Before correction, this peak
+
+had a negative \`log2FoldChange\` in the five flipped files --- confirming the
+
+direction was reversed. After correction, the same peak showed a positive
+
+\`log2FoldChange\` with exactly opposite sign --- confirming the flip was
+
+applied correctly. For the renamed-only file (AM133_vs_AM1_206), the test
+
+peak had a positive \`log2FoldChange\` both before and after --- confirming
+
+the direction was already correct.
+
+\## Code
+
+\`\`\`{r}
+
+#\| label: script0
+
+#\| eval: false
+
+\# Full script available at:
+
+\# scripts/Script0_ATAC_direction_correction.R
+
+source(here::here("scripts", "Script0_ATAC_direction_correction.R"))
+
+\`\`\`
+
+\## Reproducibility
+
+\| Item \| Details \|
+
+\|\-\--\|\-\--\|
+
+\| R version \| 4.5.3 (2026-03-11 ucrt) \|
+
+\| data.table \| 1.18.4 \|
+
+\| here \| 1.0.2 \|
+
+\| Script runtime \| 2.81 seconds \|
+
+\| SessionInfo \| reproducibility/Script0_corrections/sessionInfo/ \|
+
+\| MD5 checksums \| reproducibility/Script0_corrections/md5/ \|
+
+\| Date run \| 2026-05-29 \|
