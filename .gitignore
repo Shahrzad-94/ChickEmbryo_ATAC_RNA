@@ -1,0 +1,28 @@
+# Raw and processed data - kept locally
+data/
+
+# Results - kept locally
+results/
+
+# Cache files
+cache/
+
+# R workspace and history
+*.RData
+*.Rhistory
+
+# renv package library
+renv/library/
+renv/staging/
+
+# Quarto rendered outputs
+quarto/**/*.html
+quarto/**/*.pdf
+quarto/**/*.docx
+
+# Personal notes folder
+My own R scripts with Claude/
+
+# OS files
+.DS_Store
+Thumbs.db
