@@ -33,7 +33,7 @@ RNA-seq data: processed by Novomagic, filtered at
 
 Raw data files are not included in this repository.
 Place files as follows before running scripts:
-- data/raw/atac/deseq2/     DiffBind DESeq2 output TSV files
+- data/raw/atac/deseq2/      DiffBind DESeq2 output TSV files
 - data/raw/atac/narrowpeaks/ ATAC-seq narrow peak files
 - data/raw/atac/bigwig/      BigWig coverage files
 - data/processed/rna/        RNA-seq DEG files from Novomagic
@@ -48,7 +48,15 @@ DiffBind calculates Fold as log2(Group2/Group1) instead of
 log2(Group1/Group2). Five files are flipped; one is renamed only.
 Outputs: data/processed/atac/deseq2/ and deseq2_filtered/
 
-### Script 1: ATAC-seq Peak Annotation (coming soon)
+### Script 1: ATAC-seq Peak Annotation
+File: scripts/Script1_ATAC_annotation.R
+Documentation: quarto/Script1_ATAC_annotation.qmd
+Purpose: Annotates all ATAC-seq peaks with genomic features
+using ChIPseeker and the Ensembl v106 EnsDb for Gallus gallus
+GRCg6a (AnnotationHub record AH100636). All peaks annotated
+regardless of significance.
+Outputs: results/Script1_annotation/annotated/
+
 ### Script 2: ATAC-seq and RNA-seq Integration (coming soon)
 ### Script 3: ATAC-seq Visualisation (coming soon)
 ### Script 4: Integration Visualisation (coming soon)
