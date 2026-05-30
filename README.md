@@ -57,7 +57,16 @@ GRCg6a (AnnotationHub record AH100636). All peaks annotated
 regardless of significance.
 Outputs: results/Script1_annotation/annotated/
 
-### Script 2: ATAC-seq and RNA-seq Integration (coming soon)
+### Script 2: ATAC-seq and RNA-seq Integration
+File: scripts/Script2_ATAC_RNA_integration.R
+Documentation: quarto/Script2_ATAC_RNA_integration.qmd
+Purpose: Integrates annotated ATAC-seq peaks with RNA-seq DEGs
+by matching Ensembl gene IDs. Assigns concordance categories
+and calculates integration scores.
+Thresholds: ATAC padj <= 0.05 (no FC filter);
+RNA |log2FC| >= 0.322 AND padj <= 0.05 (pre-applied).
+Outputs: results/Script2_integration/ATAC_padj0.05_RNA_FC1.25_padj0.05/
+
 ### Script 3: ATAC-seq Visualisation (coming soon)
 ### Script 4: Integration Visualisation (coming soon)
 
