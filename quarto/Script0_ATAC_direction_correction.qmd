@@ -1,54 +1,26 @@
-\-\--
-
-title: "Script 0: ATAC-seq Fold Change Direction Correction"
-
-subtitle: "Chicken Embryo Antagomir Study --- ATAC-seq + RNA-seq Integration Pipeline"
-
-author:
-
- - name: Shahrzad Moradi Fard
-
-email: shahrzadmf94\@gmail.com
-
-affiliation: University of East Anglia
-
-date: today
-
-date-format: "DD MMMM YYYY"
-
+---
+title: "Script 0: ATAC-seq Direction Correction"
+subtitle: "Chicken Embryo Antagomir Study — ATAC-seq + RNA-seq Integration Pipeline"
+author: "Shahrzad Moradi Fard"
+date: "2026-05-29"
 format:
-
-html:
-
-toc: true
-
-toc-depth: 3
-
-toc-title: "Contents"
-
-number-sections: true
-
-theme: flatly
-
-code-fold: true
-
-code-summary: "Show code"
-
-self-contained: true
-
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Contents"
+    number-sections: true
+    theme: flatly
+    code-fold: true
+    code-summary: "Show code"
+    self-contained: true
 execute:
+  echo: true
+  warning: false
+  message: false
+  eval: false
+---
 
-echo: true
-
-warning: false
-
-message: false
-
-eval: false
-
-\-\--
-
-\## Overview
+## \## Overview
 
 This document describes Script 0 of the ATAC-seq and RNA-seq integration
 

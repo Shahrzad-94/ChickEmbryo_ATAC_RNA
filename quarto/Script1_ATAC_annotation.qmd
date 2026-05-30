@@ -1,54 +1,26 @@
-\-\--
-
+---
 title: "Script 1: ATAC-seq Peak Annotation"
-
-subtitle: "Chicken Embryo Antagomir Study --- ATAC-seq + RNA-seq Integration Pipeline"
-
-author:
-
- - name: Shahrzad Moradi Fard
-
-email: shahrzadmf94\@gmail.com
-
-affiliation: University of East Anglia
-
-date: today
-
-date-format: "DD MMMM YYYY"
-
+subtitle: "Chicken Embryo Antagomir Study — ATAC-seq + RNA-seq Integration Pipeline"
+author: "Shahrzad Moradi Fard"
+date: "2026-05-30"
 format:
-
-html:
-
-toc: true
-
-toc-depth: 3
-
-toc-title: "Contents"
-
-number-sections: true
-
-theme: flatly
-
-code-fold: true
-
-code-summary: "Show code"
-
-self-contained: true
-
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Contents"
+    number-sections: true
+    theme: flatly
+    code-fold: true
+    code-summary: "Show code"
+    self-contained: true
 execute:
+  echo: true
+  warning: false
+  message: false
+  eval: false
+---
 
-echo: true
-
-warning: false
-
-message: false
-
-eval: false
-
-\-\--
-
-\## Overview
+## \## Overview
 
 This document describes Script 1 of the ATAC-seq and RNA-seq integration
 
@@ -274,7 +246,7 @@ affect annotation of peaks on standard chromosomes.
 
 \# scripts/Script1_ATAC_annotation.R
 
-source(here::here("scripts", "Script1_ATAC_annotation.R"))
+source(here::here(\"scripts\", \"Script1_ATAC_annotation.R\"))
 
 \`\`\`
 

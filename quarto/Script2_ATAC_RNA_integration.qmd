@@ -1,0 +1,299 @@
+---
+title: "Script 2: ATAC-seq and RNA-seq Integration"
+subtitle: "Chicken Embryo Antagomir Study — ATAC-seq + RNA-seq Integration Pipeline"
+author: "Shahrzad Moradi Fard"
+date: "2026-05-30"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Contents"
+    number-sections: true
+    theme: flatly
+    code-fold: true
+    code-summary: "Show code"
+    self-contained: true
+execute:
+  echo: true
+  warning: false
+  message: false
+  eval: false
+---
+
+\## Overview
+
+This document describes Script 2 of the ATAC-seq and RNA-seq integration
+
+pipeline. Script 2 integrates the annotated ATAC-seq differential peak
+
+data with RNA-seq differential expression data by matching Ensembl gene
+
+IDs between both datasets. For each of the six pairwise comparisons it
+
+identifies genes that are both differentially accessible in chromatin and
+
+differentially expressed, assigns concordance categories, calculates
+
+integration scores, and saves results for downstream visualisation in
+
+Scripts 3 and 4.
+
+\### Integration strategy
+
+Ensembl gene IDs are used as the primary matching key rather than gene
+
+symbols because they are stable identifiers that do not change between
+
+annotation versions. Gene symbols can be renamed between Ensembl releases
+
+--- for example a gene annotated as CTRB2 in Ensembl v106 may appear as
+
+CTRB1 in a newer version or in NCBI. Both gene symbols are retained in
+
+the output (\`gene_name_atac\` from ATAC annotation and \`gene_name_rna\`
+
+from RNA-seq) for biological interpretation and transparency.
+
+\### Thresholds applied
+
+\- ATAC-seq: padj \<= 0.05, no fold change filter. Chromatin accessibility
+
+changes are often modest in absolute fold change terms but biologically
+
+meaningful, so no fold change threshold is applied.
+
+\- RNA-seq: pre-filtered by Novomagic at \|log2FC\| \>= 0.322 (FC \>= 1.25)
+
+AND padj \<= 0.05. Files are used as delivered with no additional
+
+filtering.
+
+\### Concordance categories
+
+Four categories are assigned based on the direction of chromatin
+
+accessibility and gene expression changes:
+
+\| Category \| ATAC log2FC \| RNA log2FC \| Biological interpretation \|
+
+\|\-\--\|\-\--\|\-\--\|\-\--\|
+
+\| Concordant up \| Positive \| Positive \| Chromatin more open and gene more expressed --- gene being activated \|
+
+\| Concordant down \| Negative \| Negative \| Chromatin more closed and gene less expressed --- gene being repressed \|
+
+\| Discordant (open/down) \| Positive \| Negative \| More open but less expressed --- complex regulation \|
+
+\| Discordant (closed/up) \| Negative \| Positive \| More closed but more expressed --- indirect regulation \|
+
+\## Inputs
+
+\| File \| Location \|
+
+\|\-\--\|\-\--\|
+
+\| AM133_vs_AMScr_annotated.tsv \| results/Script1_annotation/annotated/ \|
+
+\| AMAll_vs_AMScr_annotated.tsv \| results/Script1_annotation/annotated/ \|
+
+\| AM1_206_vs_AMScr_annotated.tsv \| results/Script1_annotation/annotated/ \|
+
+\| AM133_vs_AM1_206_annotated.tsv \| results/Script1_annotation/annotated/ \|
+
+\| AM133_vs_AMAll_annotated.tsv \| results/Script1_annotation/annotated/ \|
+
+\| AM1_206_vs_AMAll_annotated.tsv \| results/Script1_annotation/annotated/ \|
+
+\| AM133vsAMScr_deg_all.tsv \| data/processed/rna/ \|
+
+\| AMAllvsAMScr_deg_all.tsv \| data/processed/rna/ \|
+
+\| AM1_206vsAMScr_deg_all.tsv \| data/processed/rna/ \|
+
+\| AM133vsAM1_206_deg_all.tsv \| data/processed/rna/ \|
+
+\| AM133vsAMAll_deg_all.tsv \| data/processed/rna/ \|
+
+\| AM1_206vsAMAll_deg_all.tsv \| data/processed/rna/ \|
+
+\## Outputs
+
+All outputs saved in:
+
+\`results/Script2_integration/ATAC_padj0.05_RNA_FC1.25_padj0.05/\`
+
+\| File \| Description \|
+
+\|\-\--\|\-\--\|
+
+\| per_comparison/integration\_\[name\].tsv \| Full integration table per comparison \|
+
+\| per_comparison/integration\_\[name\].xlsx \| Same as TSV in Excel format \|
+
+\| per_comparison/venn_genes\_\[name\].xlsx \| Gene lists by category (7 sheets) \|
+
+\| summary/integration_summary.tsv \| Summary across all comparisons \|
+
+\| summary/integration_summary.xlsx \| Summary in Excel format \|
+
+\### Integration score columns
+
+\| Column \| Description \|
+
+\|\-\--\|\-\--\|
+
+\| concordance \| Concordance category \|
+
+\| combined_score \| atac_log2FC × rna_log2FC --- positive = concordant \|
+
+\| combined_pvalue \| atac_padj × rna_padj --- product of adjusted p-values \|
+
+\| neg_log10_pval \| -log10(combined_pvalue) --- Y axis for volcano plots \|
+
+\| weighted_score \| combined_score × neg_log10_pval --- primary ranking metric \|
+
+\| z_combined_score \| Z-score normalised combined score --- equal weight to both datasets \|
+
+\| sig_score \| -log10(atac_padj) + -log10(rna_padj) --- additive significance \|
+
+\| distance_weight \| Exponential decay proximity weight (\~0.95 at 500bp, \~0.007 at 50kb) \|
+
+\| distance_weighted_score \| combined_score × distance_weight \|
+
+\## Results
+
+\### Integration summary
+
+\| Comparison \| Group \| ATAC genes \| RNA genes \| Overlap \| Pearson r \| p-value \|
+
+\|\-\--\|\-\--\|\-\--\|\-\--\|\-\--\|\-\--\|\-\--\|
+
+\| AM133_vs_AMScr \| vs Scramble \| 6,347 \| 240 \| 78 \| 0.147 \| 0.080 \|
+
+\| AMAll_vs_AMScr \| vs Scramble \| 7,292 \| 225 \| 82 \| -0.006 \| 0.935 \|
+
+\| AM1_206_vs_AMScr \| vs Scramble \| 127 \| 961 \| 8 \| 0.129 \| 0.741 \|
+
+\| AM133_vs_AM1_206 \| vs Each Other \| 1,613 \| 680 \| 107 \| 0.168 \| 0.048 \|
+
+\| AM133_vs_AMAll \| vs Each Other \| 4 \| 17 \| 0 \| NA \| NA \|
+
+\| AM1_206_vs_AMAll \| vs Each Other \| 4,908 \| 737 \| 296 \| 0.214 \| \<0.001 \|
+
+\### Concordance summary per comparison
+
+\*\*AM133_vs_AMScr\*\* (78 overlapping genes, 144 peak-gene pairs):
+
+\| Category \| N \|
+
+\|\-\--\|\-\--\|
+
+\| Concordant down \| 90 \|
+
+\| Discordant (closed/up) \| 53 \|
+
+\| Concordant up \| 1 \|
+
+\*\*AMAll_vs_AMScr\*\* (82 overlapping genes, 167 peak-gene pairs):
+
+\| Category \| N \|
+
+\|\-\--\|\-\--\|
+
+\| Concordant down \| 100 \|
+
+\| Discordant (closed/up) \| 60 \|
+
+\| Discordant (open/down) \| 5 \|
+
+\| Concordant up \| 2 \|
+
+\*\*AM1_206_vs_AMScr\*\* (8 overlapping genes, 9 peak-gene pairs):
+
+\| Category \| N \|
+
+\|\-\--\|\-\--\|
+
+\| Concordant down \| 9 \|
+
+\*\*AM133_vs_AM1_206\*\* (107 overlapping genes, 139 peak-gene pairs):
+
+\| Category \| N \|
+
+\|\-\--\|\-\--\|
+
+\| Concordant down \| 127 \|
+
+\| Discordant (closed/up) \| 12 \|
+
+\*\*AM133_vs_AMAll\*\*: No overlapping genes --- skipped.
+
+\*\*AM1_206_vs_AMAll\*\* (296 overlapping genes, 414 peak-gene pairs):
+
+\| Category \| N \|
+
+\|\-\--\|\-\--\|
+
+\| Concordant up \| 325 \|
+
+\| Discordant (open/down) \| 89 \|
+
+\### Note on multiple peaks per gene
+
+The number of integrated rows exceeds the number of overlapping genes
+
+because one gene can have multiple significant ATAC-seq peaks. Each
+
+ATAC peak is retained as a separate row in the integration table,
+
+preserving all peak-gene associations. This is scientifically correct
+
+since multiple peaks near one gene all contribute to the chromatin
+
+accessibility landscape of that gene.
+
+\## Code
+
+\`\`\`{r}
+
+#\| label: script2
+
+#\| eval: false
+
+\# Full script available at:
+
+\# scripts/Script2_ATAC_RNA_integration.R
+
+source(here::here("scripts", "Script2_ATAC_RNA_integration.R"))
+
+\`\`\`
+
+\## Reproducibility
+
+\| Item \| Details \|
+
+\|\-\--\|\-\--\|
+
+\| R version \| 4.5.3 (2026-03-11 ucrt) \|
+
+\| Bioconductor \| 3.22 \|
+
+\| data.table \| 1.18.4 \|
+
+\| openxlsx \| 4.2.8.1 \|
+
+\| here \| 1.0.2 \|
+
+\| ATAC threshold \| padj \<= 0.05, no FC filter \|
+
+\| RNA threshold \| \\\|log2FC\\\| \>= 0.322 (FC \>= 1.25) AND padj \<= 0.05 (pre-applied) \|
+
+\| Integration key \| Ensembl gene ID \|
+
+\| Script runtime \| 23.7 seconds \|
+
+\| SessionInfo \| reproducibility/Script2_integration/sessionInfo/ \|
+
+\| MD5 checksums \| reproducibility/Script2_integration/md5/ \|
+
+\| Date run \| 2026-05-30 \|
