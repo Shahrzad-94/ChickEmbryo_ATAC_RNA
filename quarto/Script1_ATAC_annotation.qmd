@@ -1,0 +1,295 @@
+\-\--
+
+title: "Script 1: ATAC-seq Peak Annotation"
+
+subtitle: "Chicken Embryo Antagomir Study --- ATAC-seq + RNA-seq Integration Pipeline"
+
+author:
+
+ - name: Shahrzad Moradi Fard
+
+email: shahrzadmf94\@gmail.com
+
+affiliation: University of East Anglia
+
+date: today
+
+date-format: "DD MMMM YYYY"
+
+format:
+
+html:
+
+toc: true
+
+toc-depth: 3
+
+toc-title: "Contents"
+
+number-sections: true
+
+theme: flatly
+
+code-fold: true
+
+code-summary: "Show code"
+
+self-contained: true
+
+execute:
+
+echo: true
+
+warning: false
+
+message: false
+
+eval: false
+
+\-\--
+
+\## Overview
+
+This document describes Script 1 of the ATAC-seq and RNA-seq integration
+
+pipeline. Script 1 annotates all peaks from the six corrected DiffBind
+
+ATAC-seq output files with genomic feature information using ChIPseeker
+
+and the Ensembl v106 EnsDb for Gallus gallus GRCg6a (AnnotationHub
+
+record AH100636). All peaks are annotated regardless of significance ---
+
+downstream scripts apply their own significance filters as needed.
+
+\### Why annotation is needed
+
+The corrected DiffBind output files from Script 0 contain only genomic
+
+coordinates (Chr, Start, End) and statistical values. Annotation adds:
+
+\- The genomic feature category of each peak (promoter, intron, exon,
+
+intergenic etc.)
+
+\- The nearest gene Ensembl ID and gene symbol
+
+\- The distance from each peak to the nearest transcription start site
+
+\- Gene biotype information
+
+This information is essential for integrating ATAC-seq peaks with
+
+RNA-seq gene expression data in Script 2, and for visualising genomic
+
+feature distributions in Scripts 3 and 4.
+
+\### Why AH100636 instead of TxDb.Ggallus.UCSC.galGal6.refGene
+
+Previous versions of this pipeline used
+
+\`TxDb.Ggallus.UCSC.galGal6.refGene\` (UCSC refGene annotation) and
+
+\`org.Gg.eg.db\` for gene annotation. Both use different annotation
+
+sources and versions from the Ensembl v106 reference used for RNA-seq
+
+alignment and quantification. AH100636 is the Ensembl v106 EnsDb for
+
+Gallus gallus GRCg6a --- the exact same annotation version used throughout
+
+the pipeline --- ensuring complete consistency between ATAC-seq peak
+
+annotation and RNA-seq gene identifiers.
+
+\### Chromosome naming note
+
+The \`seqlevelsStyle()\` function for converting between UCSC and Ensembl
+
+chromosome naming styles is not available for Gallus gallus in
+
+GenomeInfoDb --- this is a known package limitation. The mismatch between
+
+UCSC-style chromosome names in the DiffBind files (chr1, chr2...) and
+
+Ensembl-style names in AH100636 (1, 2...) is handled manually: the chr
+
+prefix is stripped before annotation and restored in the output files.
+
+Peaks on unplaced scaffolds (chrUn_NW\_...) are dropped by ChIPseeker
+
+during annotation as they do not match any Ensembl v106 chromosome ---
+
+this is scientifically correct and expected.
+
+\## Inputs
+
+\| File \| Location \|
+
+\|\-\--\|\-\--\|
+
+\| AM133_vs_AMScr_atac.tsv \| data/processed/atac/deseq2/ \|
+
+\| AMAll_vs_AMScr_atac.tsv \| data/processed/atac/deseq2/ \|
+
+\| AM1_206_vs_AMScr_atac.tsv \| data/processed/atac/deseq2/ \|
+
+\| AM133_vs_AM1_206_atac.tsv \| data/processed/atac/deseq2/ \|
+
+\| AM133_vs_AMAll_atac.tsv \| data/processed/atac/deseq2/ \|
+
+\| AM1_206_vs_AMAll_atac.tsv \| data/processed/atac/deseq2/ \|
+
+\| AH100636 \| AnnotationHub cache (Ensembl v106 EnsDb) \|
+
+\## Outputs
+
+\| File \| Location \|
+
+\|\-\--\|\-\--\|
+
+\| AM133_vs_AMScr_annotated.tsv \| results/Script1_annotation/annotated/ \|
+
+\| AMAll_vs_AMScr_annotated.tsv \| results/Script1_annotation/annotated/ \|
+
+\| AM1_206_vs_AMScr_annotated.tsv \| results/Script1_annotation/annotated/ \|
+
+\| AM133_vs_AM1_206_annotated.tsv \| results/Script1_annotation/annotated/ \|
+
+\| AM133_vs_AMAll_annotated.tsv \| results/Script1_annotation/annotated/ \|
+
+\| AM1_206_vs_AMAll_annotated.tsv \| results/Script1_annotation/annotated/ \|
+
+\### Columns added by annotation
+
+\| Column \| Description \|
+
+\|\-\--\|\-\--\|
+
+\| annotation \| Genomic feature category (Promoter, Intron, Exon, Intergenic etc.) \|
+
+\| geneChr \| Chromosome of nearest gene \|
+
+\| geneStart \| Start coordinate of nearest gene \|
+
+\| geneEnd \| End coordinate of nearest gene \|
+
+\| geneLength \| Length of nearest gene \|
+
+\| geneStrand \| Strand of nearest gene \|
+
+\| ensembl_gene_id \| Ensembl v106 gene ID of nearest gene \|
+
+\| external_gene_name \| Gene symbol (Ensembl ID used where no symbol exists) \|
+
+\| gene_biotype \| Gene biotype (protein_coding, lncRNA etc.) \|
+
+\| transcriptId \| Ensembl transcript ID \|
+
+\| transcriptBiotype \| Transcript biotype \|
+
+\| distanceToTSS \| Distance in bp to nearest transcription start site \|
+
+\## Results
+
+\### Annotation summary
+
+\| Comparison \| Input peaks \| Annotated peaks \| Dropped \| Coverage \|
+
+\|\-\--\|\-\--\|\-\--\|\-\--\|\-\--\|
+
+\| AM133_vs_AMScr \| 93,678 \| 92,990 \| 688 \| 100% \|
+
+\| AMAll_vs_AMScr \| 92,751 \| 92,162 \| 589 \| 100% \|
+
+\| AM1_206_vs_AMScr \| 95,911 \| 95,536 \| 375 \| 100% \|
+
+\| AM133_vs_AM1_206 \| 79,564 \| 78,838 \| 726 \| 100% \|
+
+\| AM133_vs_AMAll \| 71,670 \| 70,869 \| 801 \| 100% \|
+
+\| AM1_206_vs_AMAll \| 78,038 \| 77,415 \| 623 \| 100% \|
+
+Dropped peaks are those located on unplaced scaffold chromosomes
+
+(chrUn_NW\_...) that do not match any Ensembl v106 chromosome entry.
+
+All annotated peaks (100%) received a gene identifier --- either a
+
+gene symbol where available or an Ensembl gene ID as placeholder.
+
+\### Gene lookup table
+
+The Ensembl v106 EnsDb contains 24,356 genes for Gallus gallus GRCg6a:
+
+\- 13,605 genes with an assigned gene symbol
+
+\- 10,751 genes using Ensembl ID as identifier (no assigned symbol)
+
+\### Warnings
+
+Bioinformatically expected warnings were generated during annotation:
+
+\- \`.merge_two_Seqinfo_objects\` warnings: ChIPseeker notes sequence
+
+level mismatches between the EnsDb and the peak files --- specifically
+
+unplaced scaffold sequences present in the DiffBind files but absent
+
+from Ensembl v106, and random chromosome sequences present in Ensembl
+
+v106 but absent from the DiffBind files. These warnings are expected
+
+and do not affect annotation of peaks on standard chromosomes.
+
+\## Code
+
+\`\`\`{r}
+
+#\| label: script1
+
+#\| eval: false
+
+\# Full script available at:
+
+\# scripts/Script1_ATAC_annotation.R
+
+source(here::here("scripts", "Script1_ATAC_annotation.R"))
+
+\`\`\`
+
+\## Reproducibility
+
+\| Item \| Details \|
+
+\|\-\--\|\-\--\|
+
+\| R version \| 4.5.3 (2026-03-11 ucrt) \|
+
+\| Bioconductor \| 3.22 \|
+
+\| AnnotationHub \| 4.0.0 \|
+
+\| ensembldb \| 2.34.0 \|
+
+\| ChIPseeker \| 1.46.1 \|
+
+\| GenomicRanges \| 1.62.1 \|
+
+\| GenomicFeatures \| 1.62.0 \|
+
+\| data.table \| 1.18.4 \|
+
+\| here \| 1.0.2 \|
+
+\| Annotation resource \| AH100636 --- Ensembl v106 EnsDb for Gallus gallus GRCg6a \|
+
+\| TSS region \| ±3000 bp \|
+
+\| Script runtime \| 1.18 minutes \|
+
+\| SessionInfo \| reproducibility/Script1_annotation/sessionInfo/ \|
+
+\| MD5 checksums \| reproducibility/Script1_annotation/md5/ \|
+
+\| Date run \| 2026-05-30 \|
