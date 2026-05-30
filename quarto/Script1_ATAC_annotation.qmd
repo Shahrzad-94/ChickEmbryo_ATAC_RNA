@@ -74,15 +74,19 @@ intergenic etc.)
 
 \- The nearest gene Ensembl ID and gene symbol
 
+\- The chromosome of the nearest gene from Ensembl v106
+
 \- The distance from each peak to the nearest transcription start site
 
 \- Gene biotype information
 
 This information is essential for integrating ATAC-seq peaks with
 
-RNA-seq gene expression data in Script 2, and for visualising genomic
+RNA-seq gene expression data in Script 2 by matching on Ensembl gene
 
-feature distributions in Scripts 3 and 4.
+IDs, and for visualising genomic feature distributions in Scripts 3
+
+and 4.
 
 \### Why AH100636 instead of TxDb.Ggallus.UCSC.galGal6.refGene
 
@@ -120,7 +124,11 @@ Peaks on unplaced scaffolds (chrUn_NW\_...) are dropped by ChIPseeker
 
 during annotation as they do not match any Ensembl v106 chromosome ---
 
-this is scientifically correct and expected.
+this is scientifically correct and expected. The chromosome of each
+
+nearest gene is retrieved directly from the Ensembl v106 EnsDb to
+
+ensure annotation consistency throughout the pipeline.
 
 \## Inputs
 
@@ -168,7 +176,7 @@ this is scientifically correct and expected.
 
 \| annotation \| Genomic feature category (Promoter, Intron, Exon, Intergenic etc.) \|
 
-\| geneChr \| Chromosome of nearest gene \|
+\| gene_chromosome \| Chromosome of nearest gene from Ensembl v106 EnsDb \|
 
 \| geneStart \| Start coordinate of nearest gene \|
 
@@ -180,7 +188,7 @@ this is scientifically correct and expected.
 
 \| ensembl_gene_id \| Ensembl v106 gene ID of nearest gene \|
 
-\| external_gene_name \| Gene symbol (Ensembl ID used where no symbol exists) \|
+\| external_gene_name \| Gene symbol from Ensembl v106 (Ensembl ID used where no symbol exists) \|
 
 \| gene_biotype \| Gene biotype (protein_coding, lncRNA etc.) \|
 
@@ -218,13 +226,25 @@ All annotated peaks (100%) received a gene identifier --- either a
 
 gene symbol where available or an Ensembl gene ID as placeholder.
 
-\### Gene lookup table
+\### Gene annotation lookup table
 
 The Ensembl v106 EnsDb contains 24,356 genes for Gallus gallus GRCg6a:
 
 \- 13,605 genes with an assigned gene symbol
 
 \- 10,751 genes using Ensembl ID as identifier (no assigned symbol)
+
+Gene symbols were retrieved from Ensembl v106. As gene nomenclature
+
+is subject to ongoing revision, symbol assignments may differ between
+
+annotation versions and between Ensembl and NCBI databases. Ensembl
+
+gene IDs are used as the primary matching key in downstream integration
+
+analyses as they are stable identifiers that do not change between
+
+annotation updates.
 
 \### Warnings
 
@@ -236,11 +256,11 @@ level mismatches between the EnsDb and the peak files --- specifically
 
 unplaced scaffold sequences present in the DiffBind files but absent
 
-from Ensembl v106, and random chromosome sequences present in Ensembl
+from Ensembl v106, and sequences present in Ensembl v106 but absent
 
-v106 but absent from the DiffBind files. These warnings are expected
+from the DiffBind files. These warnings are expected and do not
 
-and do not affect annotation of peaks on standard chromosomes.
+affect annotation of peaks on standard chromosomes.
 
 \## Code
 
@@ -286,7 +306,9 @@ source(here::here("scripts", "Script1_ATAC_annotation.R"))
 
 \| TSS region \| ±3000 bp \|
 
-\| Script runtime \| 1.18 minutes \|
+\| Integration matching key \| Ensembl gene ID \|
+
+\| Script runtime \| 30.26 seconds \|
 
 \| SessionInfo \| reproducibility/Script1_annotation/sessionInfo/ \|
 
