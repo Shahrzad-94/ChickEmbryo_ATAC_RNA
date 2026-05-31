@@ -1,0 +1,129 @@
+---
+title: "Script 3: ATAC-seq Visualisation"
+subtitle: "Chicken Embryo Antagomir Study — ATAC-seq + RNA-seq Integration Pipeline"
+author: "Shahrzad Moradi Fard"
+date: "2026-05-31"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Contents"
+    number-sections: true
+    theme: flatly
+    code-fold: true
+    code-summary: "Show code"
+    self-contained: true
+execute:
+  echo: true
+  warning: false
+  message: false
+  eval: false
+---
+
+## \## Overview
+
+Script 3 generates all ATAC-seq-specific visualisations from the annotated peak files produced by Script 1. No re-annotation is performed --- all genomic feature and distance information is read directly from the Script 1 output files, ensuring complete consistency between annotation and visualisation. Significant peaks are defined throughout as padj ≤ 0.05 with no fold change filter.
+
+The script produces five categories of output: genomic feature pie charts, combined annotation bar charts, distance-to-TSS bidirectional bar charts, Manhattan plots, and circos plots.
+
+## Inputs
+
+All inputs are annotated TSV files from Script 1:
+
+\| File \| Location \|
+\|\-\--\|\-\--\|
+\| AM133_vs_AMScr_annotated.tsv \| results/Script1_annotation/annotated/ \|
+\| AMAll_vs_AMScr_annotated.tsv \| results/Script1_annotation/annotated/ \|
+\| AM1_206_vs_AMScr_annotated.tsv \| results/Script1_annotation/annotated/ \|
+\| AM133_vs_AM1_206_annotated.tsv \| results/Script1_annotation/annotated/ \|
+\| AM133_vs_AMAll_annotated.tsv \| results/Script1_annotation/annotated/ \|
+\| AM1_206_vs_AMAll_annotated.tsv \| results/Script1_annotation/annotated/ \|
+
+## Outputs
+
+All outputs saved in: \`results/Script3_ATAC_visualisation/\`
+
+\| Folder \| Contents \|
+\|\-\--\|\-\--\|
+\| genomic_features/pie/ \| One pie chart per comparison (PNG + PDF) \|
+\| genomic_features/annobar/ \| Three annotation bar charts: all, Group 1, Group 2 (PNG + PDF) \|
+\| genomic_features/distance_to_tss/ \| One distance-to-TSS chart per comparison (PNG + PDF) \|
+\| manhattan/ \| Six individual Manhattan plots + combined panel + six Excel files (PNG + PDF + XLSX) \|
+\| circos/ \| Three circos plots: all, Group 1, Group 2 (PNG + PDF) \|
+
+## Colour palette
+
+All colours are from the Okabe-Ito colourblind-safe palette, defined once and referenced throughout.
+
+\| Plot type \| Category \| Colour \|
+\|\-\--\|\-\--\|\-\--\|
+\| Genomic features \| Promoter \| Blue #0072B2 \|
+\| Genomic features \| 5' UTR \| Sky Blue #56B4E9 \|
+\| Genomic features \| 3' UTR \| Bluish Green #009E73 \|
+\| Genomic features \| Exon \| Orange #E69F00 \|
+\| Genomic features \| Intron \| Reddish Purple #CC79A7 \|
+\| Genomic features \| Distal Intergenic \| Vermillion #D55E00 \|
+\| Genomic features \| Downstream \| Yellow #F0E442 \|
+\| Manhattan \| Opening chromatin \| Vermillion #D55E00 \|
+\| Manhattan \| Closing chromatin \| Blue #0072B2 \|
+\| Circos \| AM133 vs AMScr \| Vermillion #D55E00 \|
+\| Circos \| AMAll vs AMScr \| Blue #0072B2 \|
+\| Circos \| AM1/206 vs AMScr \| Bluish Green #009E73 \|
+\| Circos \| AM1/206 vs AM133 \| Orange #E69F00 \|
+\| Circos \| AMAll vs AM133 \| Reddish Purple #CC79A7 \|
+\| Circos \| AMAll vs AM1/206 \| Sky Blue #56B4E9 \|
+
+## Methods summary
+
+### Annotation category simplification
+
+ChIPseeker annotation labels contain detailed transcript and exon information (e.g. "Intron (ENSGALT\.../ENSGALG\..., intron 3 of 12)"). These are simplified to seven clean categories using pattern matching: Promoter, Exon, Intron, Downstream, Distal Intergenic, 5' UTR, and 3' UTR. The same simplification is applied identically across all six comparisons.
+
+### Genomic feature pie charts
+
+One pie chart per comparison. Peaks filtered to padj ≤ 0.05. The legend includes all seven feature categories in every chart regardless of whether a category is present in a given comparison, ensuring a consistent legend across all six charts.
+
+### Annotation bar charts
+
+Three 100% stacked bar charts showing the proportion of significant peaks in each genomic feature category. Each bar represents one comparison. Three versions: all six comparisons combined, Group 1 only (antagomirs vs scramble), and Group 2 only (antagomirs vs each other).
+
+### Distance to TSS bar charts
+
+One bidirectional bar chart per comparison. The distanceToTSS column from Script 1 is converted from base pairs to kilobases and binned into 12 distance bands: \\\< −100, −100 to −10, −10 to −5, −5 to −3, −3 to −1, −1 to 0, 0 to 1, 1 to 3, 3 to 5, 5 to 10, 10 to 100, and \\\> 100 kb. Upstream bands are coloured Blue and downstream bands Vermillion. The Y axis is fixed at 40% across all comparisons for direct visual comparability.
+
+### Manhattan plots
+
+One Manhattan plot per comparison plus a combined 2×3 panel. All peaks are shown regardless of significance. Non-significant peaks are displayed as small grey points. Significant peaks (padj ≤ 0.05) are coloured by chromatin change direction: Vermillion for opening (positive log2FoldChange) and Blue for closing (negative log2FoldChange). The Y axis shows −log10(padj) with no cap --- the maximum value across all comparisons is 13.6. The combined panel uses a fixed Y axis limit of 15 so all six comparisons are directly comparable. A dashed threshold line is drawn at −log10(0.05). One Excel file is saved per comparison containing all peaks with a significant (TRUE/FALSE) column to allow identification of individual data points.
+
+### Circos plots
+
+Three circular peak density plots showing the genome-wide distribution of significant ATAC-seq peaks. Peak density is calculated per 1 Mb window per chromosome and normalised 0-1 within each chromosome so all chromosomes are visually comparable regardless of size. Three versions: all six comparisons, Group 1 only, and Group 2 only.
+
+## Code
+
+\`\`\`{r}
+#\| label: script3
+#\| eval: false
+
+# Full script available at:
+# scripts/Script3_ATAC_visualisation.R
+source(here::here("scripts", "Script3_ATAC_visualisation.R"))
+\`\`\`
+
+## Reproducibility
+
+\| Item \| Details \|
+\|\-\--\|\-\--\|
+\| R version \| 4.5.3 (2026-03-11 ucrt) \|
+\| ggplot2 \| 4.0.3 \|
+\| ggrepel \| 0.9.8 \|
+\| ggpubr \| 0.6.3 \|
+\| data.table \| 1.18.4 \|
+\| openxlsx \| 4.2.8.1 \|
+\| here \| 1.0.2 \|
+\| dplyr \| 1.2.1 \|
+\| ATAC threshold \| padj ≤ 0.05, no FC filter \|
+\| Script runtime \| 5.15 minutes \|
+\| SessionInfo \| reproducibility/Script3_ATAC_visualisation/sessionInfo/ \|
+\| MD5 checksums \| reproducibility/Script3_ATAC_visualisation/md5/ \|
+\| Date run \| 2026-05-31 \|
