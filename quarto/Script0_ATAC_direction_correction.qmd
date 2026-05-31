@@ -20,7 +20,7 @@ execute:
   eval: false
 ---
 
-## \## Overview
+## ## Overview
 
 This document describes Script 0 of the ATAC-seq and RNA-seq integration
 
@@ -32,7 +32,7 @@ column names to DESeq2 convention, and saves both full corrected and
 
 significance-filtered versions for downstream analysis.
 
-\### The problem
+### The problem
 
 DiffBind calculates \`Fold\` as log2(Group2/Group1) --- where Group2 is the
 
@@ -48,7 +48,7 @@ uncorrected, all concordance classifications in the integration step would
 
 be biologically reversed.
 
-\### The solution
+### The solution
 
 Five of the six files are corrected by multiplying \`Fold\` by -1. The sixth
 
@@ -60,7 +60,7 @@ corresponding RNA-seq file (\`AM133vsAM1_206_deg_all.tsv\`). This file is
 
 renamed only, to reflect its true biological direction.
 
-\### Column standardisation
+### Column standardisation
 
 All six files have columns renamed to match DESeq2 convention:
 
@@ -74,7 +74,7 @@ All six files have columns renamed to match DESeq2 convention:
 
 \| \`p-value\` \| \`pvalue\` \| Removes hyphen to avoid R syntax issues \|
 
-\## Inputs
+## Inputs
 
 \| File \| Location \|
 
@@ -92,7 +92,7 @@ All six files have columns renamed to match DESeq2 convention:
 
 \| DEseq2_AM1_206_v_AMAll.tsv \| data/raw/atac/deseq2/ \|
 
-\## Outputs
+## Outputs
 
 \| File \| Location \| Description \|
 
@@ -122,9 +122,9 @@ All six files have columns renamed to match DESeq2 convention:
 
 \| AM1_206_vs_AMAll_atac_padj0.05.tsv \| data/processed/atac/deseq2_filtered/ \| padj \<= 0.05 \|
 
-\## Results
+## Results
 
-\### Correction summary
+### Correction summary
 
 \| Comparison \| Action \| Total peaks \| Significant (padj \<= 0.05) \| % \|
 
@@ -142,7 +142,7 @@ All six files have columns renamed to match DESeq2 convention:
 
 \| AM1_206_vs_AMAll \| Flipped + renamed \| 78,038 \| 6,685 \| 8.6% \|
 
-\### Meaning of positive log2FoldChange after correction
+### Meaning of positive log2FoldChange after correction
 
 \| Comparison \| Positive log2FoldChange means \|
 
@@ -160,7 +160,7 @@ All six files have columns renamed to match DESeq2 convention:
 
 \| AM1_206_vs_AMAll \| More open in AM1/206 \|
 
-\### Verification
+### Verification
 
 All six files were verified before and after correction using the \`Conc\`
 
@@ -182,7 +182,7 @@ peak had a positive \`log2FoldChange\` both before and after --- confirming
 
 the direction was already correct.
 
-\## Code
+## Code
 
 \`\`\`{r}
 
@@ -190,15 +190,15 @@ the direction was already correct.
 
 #\| eval: false
 
-\# Full script available at:
+# Full script available at:
 
-\# scripts/Script0_ATAC_direction_correction.R
+# scripts/Script0_ATAC_direction_correction.R
 
 source(here::here("scripts", "Script0_ATAC_direction_correction.R"))
 
 \`\`\`
 
-\## Reproducibility
+## Reproducibility
 
 \| Item \| Details \|
 

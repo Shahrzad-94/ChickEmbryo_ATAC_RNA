@@ -20,7 +20,7 @@ execute:
   eval: false
 ---
 
-\## Overview
+## ## Overview
 
 This document describes Script 2 of the ATAC-seq and RNA-seq integration
 
@@ -38,7 +38,7 @@ integration scores, and saves results for downstream visualisation in
 
 Scripts 3 and 4.
 
-\### Integration strategy
+### Integration strategy
 
 Ensembl gene IDs are used as the primary matching key rather than gene
 
@@ -54,7 +54,7 @@ the output (\`gene_name_atac\` from ATAC annotation and \`gene_name_rna\`
 
 from RNA-seq) for biological interpretation and transparency.
 
-\### Thresholds applied
+### Thresholds applied
 
 \- ATAC-seq: padj \<= 0.05, no fold change filter. Chromatin accessibility
 
@@ -68,7 +68,7 @@ AND padj \<= 0.05. Files are used as delivered with no additional
 
 filtering.
 
-\### Concordance categories
+### Concordance categories
 
 Four categories are assigned based on the direction of chromatin
 
@@ -86,7 +86,7 @@ accessibility and gene expression changes:
 
 \| Discordant (closed/up) \| Negative \| Positive \| More closed but more expressed --- indirect regulation \|
 
-\## Inputs
+## Inputs
 
 \| File \| Location \|
 
@@ -116,7 +116,7 @@ accessibility and gene expression changes:
 
 \| AM1_206vsAMAll_deg_all.tsv \| data/processed/rna/ \|
 
-\## Outputs
+## Outputs
 
 All outputs saved in:
 
@@ -136,7 +136,7 @@ All outputs saved in:
 
 \| summary/integration_summary.xlsx \| Summary in Excel format \|
 
-\### Integration score columns
+### Integration score columns
 
 \| Column \| Description \|
 
@@ -160,9 +160,9 @@ All outputs saved in:
 
 \| distance_weighted_score \| combined_score × distance_weight \|
 
-\## Results
+## Results
 
-\### Integration summary
+### Integration summary
 
 \| Comparison \| Group \| ATAC genes \| RNA genes \| Overlap \| Pearson r \| p-value \|
 
@@ -180,7 +180,7 @@ All outputs saved in:
 
 \| AM1_206_vs_AMAll \| vs Each Other \| 4,908 \| 737 \| 296 \| 0.214 \| \<0.001 \|
 
-\### Concordance summary per comparison
+### Concordance summary per comparison
 
 \*\*AM133_vs_AMScr\*\* (78 overlapping genes, 144 peak-gene pairs):
 
@@ -238,7 +238,7 @@ All outputs saved in:
 
 \| Discordant (open/down) \| 89 \|
 
-\### Note on multiple peaks per gene
+### Note on multiple peaks per gene
 
 The number of integrated rows exceeds the number of overlapping genes
 
@@ -252,7 +252,7 @@ since multiple peaks near one gene all contribute to the chromatin
 
 accessibility landscape of that gene.
 
-\## Code
+## Code
 
 \`\`\`{r}
 
@@ -260,15 +260,15 @@ accessibility landscape of that gene.
 
 #\| eval: false
 
-\# Full script available at:
+# Full script available at:
 
-\# scripts/Script2_ATAC_RNA_integration.R
+# scripts/Script2_ATAC_RNA_integration.R
 
 source(here::here("scripts", "Script2_ATAC_RNA_integration.R"))
 
 \`\`\`
 
-\## Reproducibility
+## Reproducibility
 
 \| Item \| Details \|
 

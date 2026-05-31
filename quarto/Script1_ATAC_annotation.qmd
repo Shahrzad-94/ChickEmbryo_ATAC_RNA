@@ -20,7 +20,7 @@ execute:
   eval: false
 ---
 
-## \## Overview
+## ## Overview
 
 This document describes Script 1 of the ATAC-seq and RNA-seq integration
 
@@ -34,7 +34,7 @@ record AH100636). All peaks are annotated regardless of significance ---
 
 downstream scripts apply their own significance filters as needed.
 
-\### Why annotation is needed
+### Why annotation is needed
 
 The corrected DiffBind output files from Script 0 contain only genomic
 
@@ -60,7 +60,7 @@ IDs, and for visualising genomic feature distributions in Scripts 3
 
 and 4.
 
-\### Why AH100636 instead of TxDb.Ggallus.UCSC.galGal6.refGene
+### Why AH100636 instead of TxDb.Ggallus.UCSC.galGal6.refGene
 
 Previous versions of this pipeline used
 
@@ -78,7 +78,7 @@ the pipeline --- ensuring complete consistency between ATAC-seq peak
 
 annotation and RNA-seq gene identifiers.
 
-\### Chromosome naming note
+### Chromosome naming note
 
 The \`seqlevelsStyle()\` function for converting between UCSC and Ensembl
 
@@ -102,7 +102,7 @@ nearest gene is retrieved directly from the Ensembl v106 EnsDb to
 
 ensure annotation consistency throughout the pipeline.
 
-\## Inputs
+## Inputs
 
 \| File \| Location \|
 
@@ -122,7 +122,7 @@ ensure annotation consistency throughout the pipeline.
 
 \| AH100636 \| AnnotationHub cache (Ensembl v106 EnsDb) \|
 
-\## Outputs
+## Outputs
 
 \| File \| Location \|
 
@@ -140,7 +140,7 @@ ensure annotation consistency throughout the pipeline.
 
 \| AM1_206_vs_AMAll_annotated.tsv \| results/Script1_annotation/annotated/ \|
 
-\### Columns added by annotation
+### Columns added by annotation
 
 \| Column \| Description \|
 
@@ -170,9 +170,9 @@ ensure annotation consistency throughout the pipeline.
 
 \| distanceToTSS \| Distance in bp to nearest transcription start site \|
 
-\## Results
+## Results
 
-\### Annotation summary
+### Annotation summary
 
 \| Comparison \| Input peaks \| Annotated peaks \| Dropped \| Coverage \|
 
@@ -198,7 +198,7 @@ All annotated peaks (100%) received a gene identifier --- either a
 
 gene symbol where available or an Ensembl gene ID as placeholder.
 
-\### Gene annotation lookup table
+### Gene annotation lookup table
 
 The Ensembl v106 EnsDb contains 24,356 genes for Gallus gallus GRCg6a:
 
@@ -218,7 +218,7 @@ analyses as they are stable identifiers that do not change between
 
 annotation updates.
 
-\### Warnings
+### Warnings
 
 Bioinformatically expected warnings were generated during annotation:
 
@@ -234,7 +234,7 @@ from the DiffBind files. These warnings are expected and do not
 
 affect annotation of peaks on standard chromosomes.
 
-\## Code
+## Code
 
 \`\`\`{r}
 
@@ -242,15 +242,15 @@ affect annotation of peaks on standard chromosomes.
 
 #\| eval: false
 
-\# Full script available at:
+# Full script available at:
 
-\# scripts/Script1_ATAC_annotation.R
+# scripts/Script1_ATAC_annotation.R
 
-source(here::here(\"scripts\", \"Script1_ATAC_annotation.R\"))
+source(here::here("scripts", "Script1_ATAC_annotation.R"))
 
 \`\`\`
 
-\## Reproducibility
+## Reproducibility
 
 \| Item \| Details \|
 
