@@ -67,7 +67,16 @@ Thresholds: ATAC padj <= 0.05 (no FC filter);
 RNA |log2FC| >= 0.322 AND padj <= 0.05 (pre-applied).
 Outputs: results/Script2_integration/ATAC_padj0.05_RNA_FC1.25_padj0.05/
 
-### Script 3: ATAC-seq Visualisation (coming soon)
+### Script 3: ATAC-seq Visualisation
+File: scripts/Script3_ATAC_visualisation.R
+Documentation: quarto/Script3_ATAC_visualisation.qmd
+Purpose: Generates all ATAC-seq visualisations from annotated
+peak files produced by Script 1. No re-annotation performed.
+Plots: genomic feature pie charts, annotation bar charts,
+distance-to-TSS bar charts, Manhattan plots, circos plots.
+Threshold: padj <= 0.05 (no FC filter).
+Outputs: results/Script3_ATAC_visualisation/
+
 ### Script 4: Integration Visualisation (coming soon)
 
 ## Reproducibility
