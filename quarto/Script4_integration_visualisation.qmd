@@ -1,0 +1,196 @@
+---
+title: "Script 4: Integration Visualisation"
+author: "Shahrzad Moradi Fard"
+format: html
+editor: visual
+---
+---
+title: "Script 4: Integration Visualisation"
+subtitle: "Chicken Embryo Antagomir Study — ATAC-seq + RNA-seq Integration Pipeline"
+author: "Shahrzad Moradi Fard"
+date: "2026-08-27"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Contents"
+    number-sections: true
+    theme: flatly
+    code-fold: true
+    code-summary: "Show code"
+    self-contained: true
+execute:
+  echo: true
+  warning: false
+  message: false
+  eval: false
+---
+
+## Overview
+
+Script 4 generates all integration visualisations from the ATAC-seq and
+RNA-seq integration files produced by Script 2. For each pairwise
+comparison it produces heatmaps, scatter plots, volcano plots, distance
+histograms, pairwise Venn diagrams, GO/KEGG enrichment bar charts, and
+protein interaction network plots. Two 3-way Venn diagrams are produced
+after the main loop showing gene overlap across all Group 1 and Group 2
+comparisons simultaneously. The AM133 versus AMAll comparison had no
+overlapping genes and is skipped gracefully throughout.
+
+All plots of the same type are directly comparable across comparisons —
+achieved by fixing colour scales, axis limits, and network size scales
+globally before any individual plot is generated.
+
+## Inputs
+
+| File | Location |
+|---|---|
+| integration_AM133_vs_AMScr.tsv | results/Script2_integration/ATAC_padj0.05_RNA_FC1.25_padj0.05/per_comparison/ |
+| integration_AMAll_vs_AMScr.tsv | results/Script2_integration/ATAC_padj0.05_RNA_FC1.25_padj0.05/per_comparison/ |
+| integration_AM1_206_vs_AMScr.tsv | results/Script2_integration/ATAC_padj0.05_RNA_FC1.25_padj0.05/per_comparison/ |
+| integration_AM133_vs_AM1_206.tsv | results/Script2_integration/ATAC_padj0.05_RNA_FC1.25_padj0.05/per_comparison/ |
+| integration_AM133_vs_AMAll.tsv | results/Script2_integration/ATAC_padj0.05_RNA_FC1.25_padj0.05/per_comparison/ |
+| integration_AM1_206_vs_AMAll.tsv | results/Script2_integration/ATAC_padj0.05_RNA_FC1.25_padj0.05/per_comparison/ |
+| integration_summary.tsv | results/Script2_integration/ATAC_padj0.05_RNA_FC1.25_padj0.05/summary/ |
+| [name]_annotated.tsv | results/Script1_annotation/annotated/ (for GO/KEGG background) |
+
+## Outputs
+
+All outputs saved in: `results/Script4_integration_visualisation/`
+
+| Folder | Contents |
+|---|---|
+| heatmap/ | One heatmap per comparison (PNG + PDF) |
+| scatter/ | Two scatter plots per comparison — labelled and unlabelled (PNG + PDF) |
+| volcano/ | Two volcano plots per comparison — labelled and unlabelled (PNG + PDF) |
+| distance_histogram/ | One distance histogram per comparison (PNG + PDF) |
+| venn/ | One pairwise Venn per comparison + two 3-way Venns (PNG + PDF) |
+| go_kegg/no_background/ | GO/KEGG bar charts — whole genome background (PNG + PDF) |
+| go_kegg/with_background/ | GO/KEGG bar charts — custom ATAC background (PNG + PDF) |
+| network/ | One network plot per comparison + hub gene Excel files (PNG + PDF + XLSX) |
+
+## Colour scheme
+
+| Plot type | Element | Colour |
+|---|---|---|
+| Heatmap ATAC | Positive log2FC | Red #D73027 |
+| Heatmap ATAC | Zero | White |
+| Heatmap ATAC | Negative log2FC | Blue #4575B4 |
+| Heatmap RNA | Positive log2FC | Yellow #FFD700 |
+| Heatmap RNA | Zero | White |
+| Heatmap RNA | Negative log2FC | Green #228B22 |
+| Concordance | Concordant up | Orange #FF8C00 |
+| Concordance | Concordant down | Purple #8A2BE2 |
+| Concordance | Discordant (open/down) | Brown #8B4513 |
+| Concordance | Discordant (closed/up) | Gray #808080 |
+| Concordance | Other | Black #000000 |
+| Network | Low hub score | Blue #4575B4 |
+| Network | High hub score | Red #D73027 |
+
+## Methods summary
+
+### Heatmap
+
+One row per gene — the most significant ATAC-seq peak selected per gene
+(lowest padj, absolute log2FC as tiebreaker). Rows ordered by concordance
+category then by descending absolute ATAC-seq log2FC. Fixed diverging
+colour scales set to the 95th percentile of absolute fold change values
+across all comparisons — ensures the same colour represents the same fold
+change magnitude in all heatmaps.
+
+### Venn diagrams
+
+Unique gene counts used — each gene counted once regardless of peak count.
+Pairwise Venns show ATAC-seq genes versus RNA-seq genes per comparison.
+3-way Venns show overlap across all three comparisons within each
+biological group.
+
+### GO/KEGG enrichment
+
+Gene symbols converted to Entrez IDs using bitr. enrichGO run for BP,
+MF, and CC ontologies. enrichKEGG run for KEGG pathways. All terms
+retrieved with no internal p-value cutoff, then filtered to p-value
+≤ 0.05 and count ≥ 2 before plotting. Two versions per comparison:
+whole genome background and custom background (all genes near significant
+ATAC-seq peaks across all comparisons, padj ≤ 0.05).
+
+### Protein interaction networks
+
+STRING database version 11.5, Gallus gallus (species 9031), medium
+confidence threshold (score ≥ 400). Hub score = normalised degree
+(degree / global maximum degree across all networks). Fixed node size
+and colour scales across all networks — same legend applies to all.
+Fruchterman-Reingold force-directed layout.
+
+## Results summary
+
+| Comparison | Integrated genes | Network nodes | Network edges |
+|---|---|---|---|
+| AM133 vs AMScr | 78 | 29 | 42 |
+| AMAll vs AMScr | 82 | 31 | 42 |
+| AM1/206 vs AMScr | 8 | — | — |
+| AM133 vs AM1/206 | 107 | 49 | 82 |
+| AM133 vs AMAll | 0 | — | — |
+| AM1/206 vs AMAll | 296 | 197 | 686 |
+
+Global maximum degree across all networks: 34
+
+## Code
+
+```{r}
+#| label: script4
+#| eval: false
+
+# Full script available at:
+# scripts/Script4_integration_visualisation.R
+source(here::here("scripts",
+                  "Script4_integration_visualisation.R"))
+```
+
+## Reproducibility
+
+| Item | Details |
+|---|---|
+| R version | 4.5.3 (2026-03-11 ucrt) |
+| ComplexHeatmap | 2.26.1 |
+| circlize | 0.4.18 |
+| clusterProfiler | 4.18.4 |
+| org.Gg.eg.db | 3.22.0 |
+| STRINGdb | 2.22.0 |
+| igraph | 2.3.1 |
+| ggraph | 2.2.2 |
+| tidygraph | 1.3.1 |
+| ggplot2 | 4.0.3 |
+| ggrepel | 0.9.8 |
+| ggforce | 0.5.0 |
+| data.table | 1.18.4 |
+| here | 1.0.2 |
+| ATAC threshold | padj ≤ 0.05, no FC filter |
+| STRING threshold | score ≥ 400 (medium confidence) |
+| GO/KEGG filter | p-value ≤ 0.05, count ≥ 2 |
+| Script runtime | 4.5 minutes |
+| SessionInfo | reproducibility/Script4_integration_visualisation/sessionInfo/ |
+| MD5 checksums | reproducibility/Script4_integration_visualisation/md5/ |
+| Date run | 2026-08-27 |
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
