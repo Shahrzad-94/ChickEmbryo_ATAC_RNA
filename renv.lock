@@ -683,6 +683,74 @@
       "NeedsCompilation": "no",
       "Author": "Guangchuang Yu [aut, cre] (ORCID: <https://orcid.org/0000-0002-6485-8781>), Ming Li [ctb], Qianwen Wang [ctb], Yun Yan [ctb], Hervé Pagès [ctb], Michael Kluge [ctb], Thomas Schwarzl [ctb], Zhougeng Xu [ctb], Chun-Hui Gao [ctb] (ORCID: <https://orcid.org/0000-0002-1445-7939>)"
     },
+    "ComplexHeatmap": {
+      "Package": "ComplexHeatmap",
+      "Version": "2.26.1",
+      "Source": "Bioconductor",
+      "Type": "Package",
+      "Title": "Make Complex Heatmaps",
+      "Date": "2026-01-30",
+      "Authors@R": "person(\"Zuguang\", \"Gu\", email = \"guzuguang@suat-sz.edu.cn\", role = c(\"aut\", \"cre\"), comment = c('ORCID'=\"0000-0002-7395-8709\"))",
+      "Depends": [
+        "R (>= 4.0.0)",
+        "methods",
+        "grid",
+        "graphics",
+        "stats",
+        "grDevices"
+      ],
+      "Imports": [
+        "circlize (>= 0.4.14)",
+        "GetoptLong",
+        "colorspace",
+        "clue",
+        "RColorBrewer",
+        "GlobalOptions (>= 0.1.0)",
+        "png",
+        "digest",
+        "IRanges",
+        "matrixStats",
+        "foreach",
+        "doParallel",
+        "codetools"
+      ],
+      "Suggests": [
+        "testthat (>= 1.0.0)",
+        "knitr",
+        "markdown",
+        "dendsort",
+        "jpeg",
+        "tiff",
+        "fastcluster",
+        "EnrichedHeatmap",
+        "dendextend (>= 1.0.1)",
+        "grImport",
+        "grImport2",
+        "glue",
+        "GenomicRanges",
+        "gridtext",
+        "pheatmap (>= 1.0.12)",
+        "gridGraphics",
+        "gplots",
+        "rmarkdown",
+        "Cairo",
+        "magick"
+      ],
+      "VignetteBuilder": "knitr",
+      "Description": "Complex heatmaps are efficient to visualize associations between different sources of data sets and reveal potential patterns. Here the ComplexHeatmap package provides a highly flexible way to arrange multiple heatmaps and supports various annotation graphics.",
+      "biocViews": "Software, Visualization, Sequencing",
+      "URL": "https://github.com/jokergoo/ComplexHeatmap, https://jokergoo.github.io/ComplexHeatmap-reference/book/",
+      "License": "MIT + file LICENSE",
+      "RoxygenNote": "7.2.3",
+      "Config/pak/sysreqs": "libpng-dev perl",
+      "Repository": "https://bioc-release.r-universe.dev",
+      "RemoteUrl": "https://github.com/bioc/ComplexHeatmap",
+      "RemoteRef": "RELEASE_3_22",
+      "RemoteSha": "880562b42a0cf2c190b461c045198463232a6305",
+      "NeedsCompilation": "no",
+      "Author": "Zuguang Gu [aut, cre] (ORCID: <https://orcid.org/0000-0002-7395-8709>)",
+      "Maintainer": "Zuguang Gu <guzuguang@suat-sz.edu.cn>"
+    },
     "DBI": {
       "Package": "DBI",
       "Version": "1.3.0",
@@ -1226,6 +1294,73 @@
       "NeedsCompilation": "yes",
       "Author": "Patrick Aboyoun [aut], Hervé Pagès [aut, cre], Michael Lawrence [aut], Sonali Arora [ctb], Martin Morgan [ctb], Kayla Morrell [ctb], Valerie Obenchain [ctb], Marcel Ramos [ctb], Lori Shepherd [ctb], Dan Tenenbaum [ctb], Daniel van Twisk [ctb]",
       "Maintainer": "Hervé Pagès <hpages.on.github@gmail.com>"
+    },
+    "GetoptLong": {
+      "Package": "GetoptLong",
+      "Version": "1.1.1",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Parsing Command-Line Arguments",
+      "Date": "2026-04-08",
+      "Authors@R": "person(\"Zuguang\", \"Gu\", email = \"guzuguang@suat-sz.edu.cn\", role = c(\"aut\", \"cre\"), comment = c('ORCID'=\"0000-0002-7395-8709\"))",
+      "Depends": [
+        "R (>= 4.0.0)"
+      ],
+      "Imports": [
+        "rjson",
+        "GlobalOptions (>= 0.1.0)",
+        "methods",
+        "crayon"
+      ],
+      "Suggests": [
+        "testthat (>= 1.0.0)",
+        "knitr",
+        "markdown",
+        "rmarkdown"
+      ],
+      "VignetteBuilder": "knitr",
+      "Description": "This is a command-line argument parser which wraps the  powerful Perl module Getopt::Long and with some adaptations for easier use in R.",
+      "URL": "https://github.com/jokergoo/GetoptLong",
+      "SystemRequirements": "Perl, Getopt::Long",
+      "License": "MIT + file LICENSE",
+      "NeedsCompilation": "no",
+      "Author": "Zuguang Gu [aut, cre] (ORCID: <https://orcid.org/0000-0002-7395-8709>)",
+      "Maintainer": "Zuguang Gu <guzuguang@suat-sz.edu.cn>",
+      "Repository": "RSPM",
+      "Encoding": "UTF-8"
+    },
+    "GlobalOptions": {
+      "Package": "GlobalOptions",
+      "Version": "0.1.4",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Generate Functions to Get or Set Global Options",
+      "Date": "2026-04-08",
+      "Authors@R": "person(\"Zuguang\", \"Gu\", email = \"guzuguang@suat-sz.edu.cn\", role = c(\"aut\", \"cre\"), comment = c('ORCID'=\"0000-0002-7395-8709\"))",
+      "Depends": [
+        "R (>= 3.3.0)",
+        "methods"
+      ],
+      "Imports": [
+        "utils"
+      ],
+      "Suggests": [
+        "testthat (>= 1.0.0)",
+        "knitr",
+        "markdown",
+        "GetoptLong",
+        "rmarkdown"
+      ],
+      "VignetteBuilder": "knitr",
+      "Description": "It provides more configurations on the option values such as validation and filtering on the values, making options invisible or private.",
+      "URL": "https://github.com/jokergoo/GlobalOptions",
+      "License": "MIT + file LICENSE",
+      "RoxygenNote": "7.3.1",
+      "Encoding": "UTF-8",
+      "NeedsCompilation": "no",
+      "Author": "Zuguang Gu [aut, cre] (ORCID: <https://orcid.org/0000-0002-7395-8709>)",
+      "Maintainer": "Zuguang Gu <guzuguang@suat-sz.edu.cn>",
+      "Repository": "RSPM"
     },
     "IRanges": {
       "Package": "IRanges",
@@ -2090,6 +2225,45 @@
       "Author": "Object-Oriented Programming Working Group [cph], Davis Vaughan [aut], Jim Hester [aut] (ORCID: <https://orcid.org/0000-0002-2739-7082>), Tomasz Kalinowski [aut], Will Landau [aut], Michael Lawrence [aut], Martin Maechler [aut] (ORCID: <https://orcid.org/0000-0002-8685-9910>), Luke Tierney [aut], Hadley Wickham [aut, cre] (ORCID: <https://orcid.org/0000-0003-4757-117X>)",
       "Maintainer": "Hadley Wickham <hadley@posit.co>",
       "Repository": "RSPM"
+    },
+    "STRINGdb": {
+      "Package": "STRINGdb",
+      "Version": "2.22.0",
+      "Source": "Bioconductor",
+      "Type": "Package",
+      "Title": "STRINGdb - Protein-Protein Interaction Networks and Functional Enrichment Analysis",
+      "Date": "2024-06-05",
+      "Author": "Andrea Franceschini <andrea.franceschini@isb-sib.ch>",
+      "Maintainer": "Damian Szklarczyk <damian.szklarczyk@imls.uzh.ch>",
+      "Description": "The STRINGdb package provides a R interface to the STRING protein-protein interactions database (https://string-db.org).",
+      "License": "GPL-2",
+      "Depends": [
+        "R (>= 2.14.0)"
+      ],
+      "Imports": [
+        "png",
+        "sqldf",
+        "plyr",
+        "igraph",
+        "httr",
+        "methods",
+        "RColorBrewer",
+        "gplots",
+        "hash",
+        "plotrix"
+      ],
+      "Suggests": [
+        "RUnit",
+        "BiocGenerics"
+      ],
+      "biocViews": "Network",
+      "Config/pak/sysreqs": "libglpk-dev libpng-dev libxml2-dev libssl-dev",
+      "Repository": "https://bioc-release.r-universe.dev",
+      "NeedsCompilation": "no",
+      "RemoteType": "repository",
+      "RemoteUrl": "https://github.com/bioc/STRINGdb",
+      "RemoteRef": "RELEASE_3_22",
+      "RemoteSha": "94848b58bbc46fa83c374679942ac775054de696"
     },
     "Seqinfo": {
       "Package": "Seqinfo",
@@ -3041,6 +3215,34 @@
       "Repository": "CRAN",
       "Encoding": "UTF-8"
     },
+    "chron": {
+      "Package": "chron",
+      "Version": "2.3-62",
+      "Source": "Repository",
+      "Title": "Chronological Objects which Can Handle Dates and Times",
+      "Description": "Provides chronological objects which can handle dates and times.",
+      "Authors@R": "c(person(\"David\", \"James\", role = \"aut\", comment = \"S original\"), person(\"Kurt\", \"Hornik\", role = c(\"aut\", \"trl\", \"cre\"), email = \"Kurt.Hornik@R-project.org\", comment = c(ORCID = \"0000-0003-4198-9911\", \"R port\")), person(\"Gabor\", \"Grothendieck\", role = \"ctb\", email = \"ggrothendieck@gmail.com\"), person(\"R Core Team\", role = \"ctb\"))",
+      "Depends": [
+        "R (>= 2.12.0)"
+      ],
+      "Imports": [
+        "graphics",
+        "stats"
+      ],
+      "Suggests": [
+        "scales",
+        "ggplot2"
+      ],
+      "Enhances": [
+        "zoo"
+      ],
+      "License": "GPL-2",
+      "NeedsCompilation": "yes",
+      "Author": "David James [aut] (S original), Kurt Hornik [aut, trl, cre] (<https://orcid.org/0000-0003-4198-9911>, R port), Gabor Grothendieck [ctb], R Core Team [ctb]",
+      "Maintainer": "Kurt Hornik <Kurt.Hornik@R-project.org>",
+      "Repository": "CRAN",
+      "Encoding": "UTF-8"
+    },
     "cigarillo": {
       "Package": "cigarillo",
       "Version": "1.0.0",
@@ -3087,6 +3289,49 @@
       "NeedsCompilation": "yes",
       "Author": "Hervé Pagès [aut, cre] (ORCID: <https://orcid.org/0009-0002-8272-4522>), Valerie Obenchain [aut], Michael Lawrence [aut], Patrick Aboyoun [ctb], Fedor Bezrukov [ctb], Martin Morgan [ctb]",
       "Maintainer": "Hervé Pagès <hpages.on.github@gmail.com>"
+    },
+    "circlize": {
+      "Package": "circlize",
+      "Version": "0.4.18",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Circular Visualization",
+      "Date": "2026-04-03",
+      "Authors@R": "person(\"Zuguang\", \"Gu\", email = \"guzuguang@suat-sz.edu.cn\", role = c(\"aut\", \"cre\"), comment = c('ORCID'=\"0000-0002-7395-8709\"))",
+      "Depends": [
+        "R (>= 4.0.0)",
+        "graphics"
+      ],
+      "Imports": [
+        "GlobalOptions (>= 0.1.2)",
+        "shape",
+        "grDevices",
+        "utils",
+        "stats",
+        "colorspace",
+        "methods",
+        "grid"
+      ],
+      "Suggests": [
+        "knitr",
+        "dendextend (>= 1.0.1)",
+        "ComplexHeatmap (>= 2.0.0)",
+        "gridBase",
+        "png",
+        "markdown",
+        "bezier",
+        "covr",
+        "rmarkdown"
+      ],
+      "VignetteBuilder": "knitr",
+      "Description": "Circular layout is an efficient way for the visualization of huge  amounts of information. Here this package provides an implementation  of circular layout generation in R as well as an enhancement of available  software. The flexibility of the package is based on the usage of low-level  graphics functions such that self-defined high-level graphics can be easily  implemented by users for specific purposes. Together with the seamless  connection between the powerful computational and visual environment in R,  it gives users more convenience and freedom to design figures for  better understanding complex patterns behind multiple dimensional data.  The package is described in Gu et al. 2014 <doi:10.1093/bioinformatics/btu393>.",
+      "URL": "https://github.com/jokergoo/circlize, https://jokergoo.github.io/circlize_book/book/",
+      "License": "MIT + file LICENSE",
+      "NeedsCompilation": "no",
+      "Author": "Zuguang Gu [aut, cre] (ORCID: <https://orcid.org/0000-0002-7395-8709>)",
+      "Maintainer": "Zuguang Gu <guzuguang@suat-sz.edu.cn>",
+      "Repository": "RSPM",
+      "Encoding": "UTF-8"
     },
     "cli": {
       "Package": "cli",
@@ -3136,6 +3381,47 @@
       "Maintainer": "Gábor Csárdi <gabor@posit.co>",
       "Repository": "CRAN"
     },
+    "clue": {
+      "Package": "clue",
+      "Version": "0.3-68",
+      "Source": "Repository",
+      "Encoding": "UTF-8",
+      "Title": "Cluster Ensembles",
+      "Description": "CLUster Ensembles.",
+      "Authors@R": "c(person(\"Kurt\", \"Hornik\", role = c(\"aut\", \"cre\"), email = \"Kurt.Hornik@R-project.org\", comment = c(ORCID = \"0000-0003-4198-9911\")), person(\"Walter\", \"Böhm\", role = \"ctb\"))",
+      "License": "GPL-2",
+      "Depends": [
+        "R (>= 3.2.0)"
+      ],
+      "Imports": [
+        "stats",
+        "cluster",
+        "graphics",
+        "methods"
+      ],
+      "Suggests": [
+        "e1071",
+        "lpSolve (>= 5.5.7)",
+        "quadprog (>= 1.4-8)",
+        "relations"
+      ],
+      "Enhances": [
+        "RWeka",
+        "ape",
+        "cba",
+        "cclust",
+        "flexclust",
+        "flexmix",
+        "kernlab",
+        "mclust",
+        "movMF",
+        "modeltools"
+      ],
+      "NeedsCompilation": "yes",
+      "Author": "Kurt Hornik [aut, cre] (ORCID: <https://orcid.org/0000-0003-4198-9911>), Walter Böhm [ctb]",
+      "Maintainer": "Kurt Hornik <Kurt.Hornik@R-project.org>",
+      "Repository": "RSPM"
+    },
     "cluster": {
       "Package": "cluster",
       "Version": "2.1.8.2",
@@ -3177,6 +3463,63 @@
       "NeedsCompilation": "yes",
       "Author": "Martin Maechler [aut, cre] (ORCID: <https://orcid.org/0000-0002-8685-9910>), Peter Rousseeuw [aut] (Fortran original, ORCID: <https://orcid.org/0000-0002-3807-5353>), Anja Struyf [aut] (S original), Mia Hubert [aut] (S original, ORCID: <https://orcid.org/0000-0001-6398-4850>), Kurt Hornik [trl, ctb] (port to R; maintenance(1999-2000), ORCID: <https://orcid.org/0000-0003-4198-9911>), Matthias Studer [ctb], Pierre Roudier [ctb], Juan Gonzalez [ctb], Kamil Kozlowski [ctb], Erich Schubert [ctb] (fastpam options for pam(), ORCID: <https://orcid.org/0000-0001-9143-4880>), Keefe Murphy [ctb] (volume.ellipsoid({d >= 3}))",
       "Repository": "CRAN"
+    },
+    "clusterProfiler": {
+      "Package": "clusterProfiler",
+      "Version": "4.18.4",
+      "Source": "Bioconductor",
+      "Type": "Package",
+      "Title": "A universal enrichment tool for interpreting omics data",
+      "Authors@R": "c( person(given = \"Guangchuang\", family = \"Yu\",        email = \"guangchuangyu@gmail.com\",   role  = c(\"aut\", \"cre\", \"cph\"), comment = c(ORCID = \"0000-0002-6485-8781\")), person(given = \"Li-Gen\",      family = \"Wang\",      email = \"reeganwang020@gmail.com\",   role  = \"ctb\"), person(given = \"Xiao\",        family = \"Luo\",       email = \"l77880853349@163.com\",      role  = \"ctb\"), person(given = \"Meijun\",      family = \"Chen\",      email = \"mjchen1996@outlook.com\",    role  = \"ctb\"), person(given = \"Giovanni\",    family = \"Dall'Olio\", email = \"giovanni.dallolio@upf.edu\", role = \"ctb\"), person(given = \"Wanqian\",     family = \"Wei\",       email = \"altair_wei@outlook.com\",    role = \"ctb\"), person(given = \"Chun-Hui\",    family = \"Gao\",       email = \"gaospecial@gmail.com\",      role = \"ctb\", comment = c(ORCID = \"0000-0002-1445-7939\")) )",
+      "Maintainer": "Guangchuang Yu <guangchuangyu@gmail.com>",
+      "Description": "This package supports functional characteristics of both coding and non-coding genomics data for thousands of species with up-to-date gene annotation. It provides a universal interface for gene functional annotation from a variety of sources and thus can be applied in diverse scenarios. It provides a tidy interface to access, manipulate, and visualize enrichment results to help users achieve efficient data interpretation. Datasets obtained from multiple treatments and time points can be analyzed and compared in a single run, easily revealing functional consensus and differences among distinct gene clusters.",
+      "Depends": [
+        "R (>= 4.2.0)"
+      ],
+      "Imports": [
+        "AnnotationDbi",
+        "DOSE (>= 3.23.2)",
+        "dplyr",
+        "enrichplot (>= 1.9.3)",
+        "GO.db",
+        "GOSemSim (>= 2.27.2)",
+        "gson (>= 0.0.7)",
+        "httr",
+        "igraph",
+        "magrittr",
+        "methods",
+        "plyr",
+        "qvalue",
+        "rlang",
+        "stats",
+        "tidyr",
+        "utils",
+        "yulab.utils (>= 0.2.3)"
+      ],
+      "Suggests": [
+        "AnnotationHub",
+        "BiocManager",
+        "jsonlite",
+        "readr",
+        "org.Hs.eg.db",
+        "quarto",
+        "testthat"
+      ],
+      "VignetteBuilder": "quarto",
+      "ByteCompile": "true",
+      "License": "Artistic-2.0",
+      "URL": "https://yulab-smu.top/contribution-knowledge-mining/",
+      "BugReports": "https://github.com/YuLab-SMU/clusterProfiler/issues",
+      "biocViews": "Annotation, Clustering, GeneSetEnrichment, GO, KEGG, MultipleComparison, Pathways, Reactome, Visualization",
+      "Encoding": "UTF-8",
+      "RoxygenNote": "7.3.3",
+      "Config/pak/sysreqs": "libcairo2-dev libfontconfig1-dev libfreetype6-dev libglpk-dev make libicu-dev libpng-dev libxml2-dev libssl-dev zlib1g-dev",
+      "Repository": "https://bioc-release.r-universe.dev",
+      "RemoteUrl": "https://github.com/bioc/clusterProfiler",
+      "RemoteRef": "RELEASE_3_22",
+      "RemoteSha": "16e65173cf2f1096f58d3b6156348833f7f75329",
+      "NeedsCompilation": "no",
+      "Author": "Guangchuang Yu [aut, cre, cph] (ORCID: <https://orcid.org/0000-0002-6485-8781>), Li-Gen Wang [ctb], Xiao Luo [ctb], Meijun Chen [ctb], Giovanni Dall'Olio [ctb], Wanqian Wei [ctb], Chun-Hui Gao [ctb] (ORCID: <https://orcid.org/0000-0002-1445-7939>)"
     },
     "codetools": {
       "Package": "codetools",
@@ -3613,6 +3956,39 @@
       "Author": "Ulrich Halekoh [aut, cph], Søren Højsgaard [aut, cre, cph]",
       "Maintainer": "Søren Højsgaard <sorenh@math.aau.dk>",
       "Repository": "CRAN"
+    },
+    "doParallel": {
+      "Package": "doParallel",
+      "Version": "1.0.17",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Foreach Parallel Adaptor for the 'parallel' Package",
+      "Authors@R": "c(person(\"Folashade\", \"Daniel\", role=\"cre\", email=\"fdaniel@microsoft.com\"), person(\"Microsoft\", \"Corporation\", role=c(\"aut\", \"cph\")), person(\"Steve\", \"Weston\", role=\"aut\"), person(\"Dan\", \"Tenenbaum\", role=\"ctb\"))",
+      "Description": "Provides a parallel backend for the %dopar% function using the parallel package.",
+      "Depends": [
+        "R (>= 2.14.0)",
+        "foreach (>= 1.2.0)",
+        "iterators (>= 1.0.0)",
+        "parallel",
+        "utils"
+      ],
+      "Suggests": [
+        "caret",
+        "mlbench",
+        "rpart",
+        "RUnit"
+      ],
+      "Enhances": [
+        "compiler"
+      ],
+      "License": "GPL-2",
+      "URL": "https://github.com/RevolutionAnalytics/doparallel",
+      "BugReports": "https://github.com/RevolutionAnalytics/doparallel/issues",
+      "NeedsCompilation": "no",
+      "Author": "Folashade Daniel [cre], Microsoft Corporation [aut, cph], Steve Weston [aut], Dan Tenenbaum [ctb]",
+      "Maintainer": "Folashade Daniel <fdaniel@microsoft.com>",
+      "Repository": "RSPM",
+      "Encoding": "UTF-8"
     },
     "dplyr": {
       "Package": "dplyr",
@@ -4094,6 +4470,42 @@
       "Author": "Lionel Henry [cre, aut], RStudio [cph], George Douros [cph] (Symbola font)",
       "Maintainer": "Lionel Henry <lionel@rstudio.com>",
       "Repository": "RSPM"
+    },
+    "foreach": {
+      "Package": "foreach",
+      "Version": "1.5.2",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Provides Foreach Looping Construct",
+      "Authors@R": "c(person(\"Folashade\", \"Daniel\", role=\"cre\", email=\"fdaniel@microsoft.com\"), person(\"Hong\", \"Ooi\", role=\"ctb\"), person(\"Rich\", \"Calaway\", role=\"ctb\"), person(\"Microsoft\", role=c(\"aut\", \"cph\")), person(\"Steve\", \"Weston\", role=\"aut\"))",
+      "Description": "Support for the foreach looping construct.  Foreach is an idiom that allows for iterating over elements in a collection, without the use of an explicit loop counter.  This package in particular is intended to be used for its return value, rather than for its side effects.  In that sense, it is similar to the standard lapply function, but doesn't require the evaluation of a function.  Using foreach without side effects also facilitates executing the loop in parallel.",
+      "License": "Apache License (== 2.0)",
+      "URL": "https://github.com/RevolutionAnalytics/foreach",
+      "BugReports": "https://github.com/RevolutionAnalytics/foreach/issues",
+      "Depends": [
+        "R (>= 2.5.0)"
+      ],
+      "Imports": [
+        "codetools",
+        "utils",
+        "iterators"
+      ],
+      "Suggests": [
+        "randomForest",
+        "doMC",
+        "doParallel",
+        "testthat",
+        "knitr",
+        "rmarkdown"
+      ],
+      "VignetteBuilder": "knitr",
+      "RoxygenNote": "7.1.1",
+      "Collate": "'callCombine.R' 'foreach.R' 'do.R' 'foreach-ext.R' 'foreach-pkg.R' 'getDoPar.R' 'getDoSeq.R' 'getsyms.R' 'iter.R' 'nextElem.R' 'onLoad.R' 'setDoPar.R' 'setDoSeq.R' 'times.R' 'utils.R'",
+      "NeedsCompilation": "no",
+      "Author": "Folashade Daniel [cre], Hong Ooi [ctb], Rich Calaway [ctb], Microsoft [aut, cph], Steve Weston [aut]",
+      "Maintainer": "Folashade Daniel <fdaniel@microsoft.com>",
+      "Repository": "RSPM",
+      "Encoding": "UTF-8"
     },
     "forecast": {
       "Package": "forecast",
@@ -4714,6 +5126,66 @@
       "Maintainer": "Alboukadel Kassambara <alboukadel.kassambara@gmail.com>",
       "Repository": "CRAN"
     },
+    "ggraph": {
+      "Package": "ggraph",
+      "Version": "2.2.2",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "An Implementation of Grammar of Graphics for Graphs and Networks",
+      "Authors@R": "c(person(given = \"Thomas Lin\", family = \"Pedersen\", role = c(\"cre\", \"aut\"), email = \"thomasp85@gmail.com\", comment = c(ORCID = \"0000-0002-5147-4711\")), person(given = \"RStudio\", role = \"cph\"))",
+      "Maintainer": "Thomas Lin Pedersen <thomasp85@gmail.com>",
+      "Description": "The grammar of graphics as implemented in ggplot2 is a poor fit for graph and network visualizations due to its reliance on tabular data input. ggraph is an extension of the ggplot2 API tailored to graph visualizations and provides the same flexible approach to building up plots layer by layer.",
+      "License": "MIT + file LICENSE",
+      "Encoding": "UTF-8",
+      "LazyData": "TRUE",
+      "Imports": [
+        "dplyr",
+        "ggforce (>= 0.3.1)",
+        "grid",
+        "igraph (>= 1.0.0)",
+        "scales",
+        "MASS",
+        "ggrepel",
+        "utils",
+        "stats",
+        "viridis",
+        "rlang",
+        "tidygraph",
+        "graphlayouts (>= 1.1.0)",
+        "withr",
+        "cli",
+        "vctrs",
+        "lifecycle",
+        "memoise"
+      ],
+      "Suggests": [
+        "network",
+        "knitr",
+        "rmarkdown",
+        "purrr",
+        "tibble",
+        "seriation",
+        "deldir",
+        "gganimate",
+        "covr",
+        "sf",
+        "sfnetworks"
+      ],
+      "LinkingTo": [
+        "cpp11"
+      ],
+      "RoxygenNote": "7.3.2",
+      "Depends": [
+        "R (>= 2.10)",
+        "ggplot2 (>= 3.5.0)"
+      ],
+      "VignetteBuilder": "knitr",
+      "URL": "https://ggraph.data-imaginist.com, https://github.com/thomasp85/ggraph",
+      "BugReports": "https://github.com/thomasp85/ggraph/issues",
+      "NeedsCompilation": "yes",
+      "Author": "Thomas Lin Pedersen [cre, aut] (ORCID: <https://orcid.org/0000-0002-5147-4711>), RStudio [cph]",
+      "Repository": "CRAN"
+    },
     "ggrepel": {
       "Package": "ggrepel",
       "Version": "0.9.8",
@@ -5012,6 +5484,41 @@
       "Repository": "RSPM",
       "Encoding": "UTF-8"
     },
+    "graphlayouts": {
+      "Package": "graphlayouts",
+      "Version": "1.2.3",
+      "Source": "Repository",
+      "Title": "Additional Layout Algorithms for Network Visualizations",
+      "Authors@R": "person(\"David\", \"Schoch\", email = \"david@schochastics.net\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0003-2952-4812\"))",
+      "Description": "Several new layout algorithms to visualize networks are provided which are not part of 'igraph'.  Most are based on the concept of stress majorization by Gansner et al. (2004) <doi:10.1007/978-3-540-31843-9_25>.  Some more specific algorithms allow the user to emphasize hidden group structures in networks or focus on specific nodes.",
+      "URL": "https://github.com/schochastics/graphlayouts, https://schochastics.github.io/graphlayouts/",
+      "BugReports": "https://github.com/schochastics/graphlayouts/issues",
+      "Depends": [
+        "R (>= 3.6.0)"
+      ],
+      "License": "MIT + file LICENSE",
+      "Encoding": "UTF-8",
+      "LazyData": "true",
+      "Imports": [
+        "igraph (>= 2.0.0)",
+        "Rcpp"
+      ],
+      "Suggests": [
+        "testthat",
+        "ggplot2",
+        "uwot",
+        "oaqc"
+      ],
+      "LinkingTo": [
+        "Rcpp",
+        "RcppArmadillo"
+      ],
+      "RoxygenNote": "7.3.2",
+      "NeedsCompilation": "yes",
+      "Author": "David Schoch [aut, cre] (ORCID: <https://orcid.org/0000-0003-2952-4812>)",
+      "Maintainer": "David Schoch <david@schochastics.net>",
+      "Repository": "CRAN"
+    },
     "gridExtra": {
       "Package": "gridExtra",
       "Version": "2.3",
@@ -5067,6 +5574,59 @@
       "Author": "Paul Murrell [cre, aut], Zhijian Wen [aut]",
       "Maintainer": "Paul Murrell <paul@stat.auckland.ac.nz>",
       "Repository": "RSPM",
+      "Encoding": "UTF-8"
+    },
+    "gson": {
+      "Package": "gson",
+      "Version": "0.1.0",
+      "Source": "Repository",
+      "Title": "Base Class and Methods for 'gson' Format",
+      "Authors@R": "c( person(\"Guangchuang\", \"Yu\",     email = \"guangchuangyu@gmail.com\", role = c(\"aut\", \"cre\", \"cph\"), comment = c(ORCID = \"0000-0002-6485-8781\")) )",
+      "Description": "Proposes a new file format ('gson') for storing gene set and related information, and provides read, write and other utilities to process this file format.",
+      "Imports": [
+        "jsonlite",
+        "methods",
+        "rlang",
+        "stats",
+        "tidyr",
+        "utils"
+      ],
+      "ByteCompile": "true",
+      "License": "Artistic-2.0",
+      "Encoding": "UTF-8",
+      "RoxygenNote": "7.2.3",
+      "NeedsCompilation": "no",
+      "Author": "Guangchuang Yu [aut, cre, cph] (<https://orcid.org/0000-0002-6485-8781>)",
+      "Maintainer": "Guangchuang Yu <guangchuangyu@gmail.com>",
+      "Repository": "RSPM"
+    },
+    "gsubfn": {
+      "Package": "gsubfn",
+      "Version": "0.7",
+      "Source": "Repository",
+      "Date": "2018-03-15",
+      "Title": "Utilities for Strings and Function Arguments",
+      "Author": "G. Grothendieck",
+      "Maintainer": "G. Grothendieck <ggrothendieck@gmail.com>",
+      "Description": "The gsubfn function is like gsub but can take a replacement  function or certain other objects instead of the replacement string. Matches and back references are input to the replacement function and  replaced by the function output.   gsubfn can be used to split strings  based on content rather than delimiters and for quasi-perl-style string  interpolation. The package also has facilities for translating formulas  to functions and allowing such formulas in function calls instead of  functions.  This can be used with R functions such as apply, sapply, lapply, optim, integrate, xyplot, Filter and any other function that  expects another function as an input argument or functions like cat or sql calls that may involve strings where substitution is desirable. There is also a facility for returning multiple objects from functions and a version of transform that allows the RHS to refer to LHS used in the same transform.",
+      "BugReports": "https://github.com/ggrothendieck/gsubfn/issues",
+      "Depends": [
+        "proto"
+      ],
+      "Suggests": [
+        "boot",
+        "chron",
+        "grid",
+        "lattice",
+        "quantreg",
+        "svUnit",
+        "tcltk",
+        "zoo"
+      ],
+      "License": "GPL (>= 2)",
+      "URL": "https://github.com/ggrothendieck/gsubfn",
+      "NeedsCompilation": "no",
+      "Repository": "CRAN",
       "Encoding": "UTF-8"
     },
     "gtable": {
@@ -5139,6 +5699,32 @@
       "Author": "Gregory R. Warnes [aut], Ben Bolker [aut, cre] (<https://orcid.org/0000-0002-2127-0443>), Thomas Lumley [aut], Arni Magnusson [aut], Bill Venables [aut], Genei Ryodan [aut], Steffen Moeller [aut], Ian Wilson [ctb], Mark Davis [ctb], Nitin Jain [ctb], Scott Chamberlain [ctb]",
       "Maintainer": "Ben Bolker <bolker@mcmaster.ca>",
       "Repository": "RSPM"
+    },
+    "hash": {
+      "Package": "hash",
+      "Version": "2.2.6.4",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Full Featured Implementation of Hash Tables/Associative Arrays/Dictionaries",
+      "Date": "2026-01-21",
+      "Authors@R": "c(person(\"Christopher\", \"Brown\", email = \"chris.brown@decisionpatterns.com\", role = \"aut\"), person(\"John\", \"Hughes\", email = \"drjphughesjr@gmail.com\", role = c(\"cre\", \"ctb\")))",
+      "Depends": [
+        "R (>= 2.12.0)",
+        "methods",
+        "utils"
+      ],
+      "Suggests": [
+        "testthat",
+        "rbenchmark"
+      ],
+      "Description": "Implements a data structure similar to hashes in Perl and dictionaries in Python but with a purposefully R flavor. For objects of appreciable size, access using hashes outperforms native named lists and vectors.",
+      "License": "GPL (>= 2)",
+      "URL": "http://www.johnhughes.org",
+      "NeedsCompilation": "no",
+      "Author": "Christopher Brown [aut], John Hughes [cre, ctb]",
+      "Maintainer": "John Hughes <drjphughesjr@gmail.com>",
+      "Repository": "CRAN",
+      "Encoding": "UTF-8"
     },
     "here": {
       "Package": "here",
@@ -5493,6 +6079,30 @@
       "Author": "Hadley Wickham [aut] (ORCID: <https://orcid.org/0000-0003-4757-117X>), Claus O. Wilke [aut] (Original author, ORCID: <https://orcid.org/0000-0002-7470-9261>), Thomas Lin Pedersen [aut, cre] (ORCID: <https://orcid.org/0000-0002-5147-4711>), Posit, PBC [cph, fnd] (ROR: <https://ror.org/03wc8by49>)",
       "Maintainer": "Thomas Lin Pedersen <thomas.pedersen@posit.co>",
       "Repository": "RSPM"
+    },
+    "iterators": {
+      "Package": "iterators",
+      "Version": "1.0.14",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Provides Iterator Construct",
+      "Authors@R": "c(person(\"Folashade\", \"Daniel\", role=\"cre\", email=\"fdaniel@microsoft.com\"), person(\"Revolution\", \"Analytics\", role=c(\"aut\", \"cph\")), person(\"Steve\", \"Weston\", role=\"aut\"))",
+      "Description": "Support for iterators, which allow a programmer to traverse through all the elements of a vector, list, or other collection of data.",
+      "URL": "https://github.com/RevolutionAnalytics/iterators",
+      "Depends": [
+        "R (>= 2.5.0)",
+        "utils"
+      ],
+      "Suggests": [
+        "RUnit",
+        "foreach"
+      ],
+      "License": "Apache License (== 2.0)",
+      "NeedsCompilation": "no",
+      "Author": "Folashade Daniel [cre], Revolution Analytics [aut, cph], Steve Weston [aut]",
+      "Maintainer": "Folashade Daniel <fdaniel@microsoft.com>",
+      "Repository": "RSPM",
+      "Encoding": "UTF-8"
     },
     "jquerylib": {
       "Package": "jquerylib",
@@ -6294,6 +6904,30 @@
       "Maintainer": "Jan Marvin Garbuszus <jan.garbuszus@ruhr-uni-bochum.de>",
       "Repository": "CRAN"
     },
+    "org.Gg.eg.db": {
+      "Package": "org.Gg.eg.db",
+      "Version": "3.22.0",
+      "Source": "Bioconductor",
+      "Title": "Genome wide annotation for Chicken",
+      "Description": "Genome wide annotation for Chicken, primarily based on mapping using Entrez Gene identifiers.",
+      "Author": "Marc Carlson",
+      "Maintainer": "Bioconductor Package Maintainer <maintainer@bioconductor.org>",
+      "Depends": [
+        "R (>= 2.7.0)",
+        "methods",
+        "AnnotationDbi (>= 1.71.1)"
+      ],
+      "Suggests": [
+        "DBI",
+        "annotate",
+        "RUnit"
+      ],
+      "License": "Artistic-2.0",
+      "organism": "Gallus gallus",
+      "species": "Chicken",
+      "biocViews": "OrgDb, AnnotationData, Gallus_gallus",
+      "NeedsCompilation": "no"
+    },
     "patchwork": {
       "Package": "patchwork",
       "Version": "1.3.2",
@@ -6580,6 +7214,27 @@
         "rmarkdown"
       ],
       "VignetteBuilder": "knitr",
+      "Repository": "CRAN",
+      "Encoding": "UTF-8"
+    },
+    "proto": {
+      "Package": "proto",
+      "Version": "1.0.0",
+      "Source": "Repository",
+      "Title": "Prototype Object-Based Programming",
+      "Description": "An object oriented system using object-based, also called prototype-based, rather than class-based object oriented ideas.",
+      "Authors@R": "c( person(\"Hadley\", \"Wickham\", , \"hadley@rstudio.com\", \"cre\"), person(\"Gabor\", \"Grothendieck\", , \"ggrothendieck@gmail.com\", \"aut\"), person(\"Louis\", \"Kates\", role = \"aut\"), person(\"Thomas\", \"Petzoldt\", role = \"aut\") )",
+      "License": "GPL-2",
+      "URL": "https://github.com/hadley/proto",
+      "BugReports": "https://github.com/hadley/proto/issues",
+      "Suggests": [
+        "testthat",
+        "covr"
+      ],
+      "RoxygenNote": "5.0.1.9000",
+      "NeedsCompilation": "no",
+      "Author": "Hadley Wickham [cre], Gabor Grothendieck [aut], Louis Kates [aut], Thomas Petzoldt [aut]",
+      "Maintainer": "Hadley Wickham <hadley@rstudio.com>",
       "Repository": "CRAN",
       "Encoding": "UTF-8"
     },
@@ -7301,6 +7956,27 @@
       "Maintainer": "Guangchuang Yu <guangchuangyu@gmail.com>",
       "Repository": "RSPM"
     },
+    "shape": {
+      "Package": "shape",
+      "Version": "1.4.6.1",
+      "Source": "Repository",
+      "Title": "Functions for Plotting Graphical Shapes, Colors",
+      "Author": "Karline Soetaert <karline.soetaert@nioz.nl>",
+      "Maintainer": "Karline Soetaert <karline.soetaert@nioz.nl>",
+      "Depends": [
+        "R (>= 2.01)"
+      ],
+      "Imports": [
+        "stats",
+        "graphics",
+        "grDevices"
+      ],
+      "Description": "Functions for plotting graphical shapes such as ellipses, circles, cylinders, arrows, ...",
+      "License": "GPL (>= 3)",
+      "NeedsCompilation": "no",
+      "Repository": "RSPM",
+      "Encoding": "UTF-8"
+    },
     "snow": {
       "Package": "snow",
       "Version": "0.4-4",
@@ -7322,6 +7998,42 @@
       ],
       "NeedsCompilation": "no",
       "Repository": "RSPM",
+      "Encoding": "UTF-8"
+    },
+    "sqldf": {
+      "Package": "sqldf",
+      "Version": "0.4-12",
+      "Source": "Repository",
+      "Date": "2026-01-29",
+      "Title": "Manipulate R Data Frames Using SQL",
+      "Authors@R": "person(given = \"G.\", family = \"Grothendieck\", role = c(\"aut\", \"cre\"), email = \"ggrothendieck@gmail.com\")",
+      "Description": "The sqldf() function is typically passed a single argument which  is an SQL select statement where the table names are ordinary R data  frame names.  sqldf() transparently sets up a database, imports the  data frames into that database, performs the SQL select or other statement and returns the result using a heuristic to determine which  class to assign to each column of the returned data frame.  The sqldf()  or read.csv.sql() functions can also be used to read filtered files  into R even if the original files are larger than R itself can handle. 'RSQLite', 'RH2', 'RMySQL' and 'RPostgreSQL' backends are supported.",
+      "ByteCompile": "true",
+      "Depends": [
+        "R (>= 3.1.0)",
+        "gsubfn (>= 0.6)",
+        "proto",
+        "RSQLite"
+      ],
+      "Suggests": [
+        "RH2",
+        "RMySQL",
+        "RPostgreSQL",
+        "svUnit",
+        "tcltk",
+        "MASS"
+      ],
+      "Imports": [
+        "DBI",
+        "chron"
+      ],
+      "License": "GPL-2",
+      "BugReports": "https://github.com/ggrothendieck/sqldf/issues",
+      "URL": "https://github.com/ggrothendieck/sqldf",
+      "NeedsCompilation": "no",
+      "Author": "G. Grothendieck [aut, cre]",
+      "Maintainer": "G. Grothendieck <ggrothendieck@gmail.com>",
+      "Repository": "CRAN",
       "Encoding": "UTF-8"
     },
     "stringi": {
@@ -7600,6 +8312,56 @@
       "Author": "Guangchuang Yu [aut, cre, cph] (ORCID: <https://orcid.org/0000-0002-6485-8781>), Shuangbin Xu [aut] (ORCID: <https://orcid.org/0000-0003-3513-5362>), Erqiang Hu [ctb]",
       "Maintainer": "Guangchuang Yu <guangchuangyu@gmail.com>",
       "Repository": "RSPM"
+    },
+    "tidygraph": {
+      "Package": "tidygraph",
+      "Version": "1.3.1",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "A Tidy API for Graph Manipulation",
+      "Authors@R": "person(\"Thomas Lin\", \"Pedersen\", , \"thomasp85@gmail.com\", role = c(\"cre\", \"aut\"), comment = c(ORCID = \"0000-0002-5147-4711\"))",
+      "Maintainer": "Thomas Lin Pedersen <thomasp85@gmail.com>",
+      "Description": "A graph, while not \"tidy\" in itself, can be thought of as two tidy data frames describing node and edge data respectively. 'tidygraph' provides an approach to manipulate these two virtual data frames using the API defined in the 'dplyr' package, as well as provides tidy interfaces to a lot of common graph algorithms.",
+      "License": "MIT + file LICENSE",
+      "URL": "https://tidygraph.data-imaginist.com, https://github.com/thomasp85/tidygraph",
+      "BugReports": "https://github.com/thomasp85/tidygraph/issues",
+      "Imports": [
+        "cli",
+        "dplyr (>= 0.8.5)",
+        "igraph (>= 2.0.0)",
+        "lifecycle",
+        "magrittr",
+        "pillar",
+        "R6",
+        "rlang",
+        "stats",
+        "tibble",
+        "tidyr",
+        "tools",
+        "utils"
+      ],
+      "Suggests": [
+        "ape",
+        "covr",
+        "data.tree",
+        "graph",
+        "influenceR",
+        "methods",
+        "netrankr",
+        "NetSwan",
+        "network",
+        "seriation",
+        "testthat (>= 3.0.0)"
+      ],
+      "LinkingTo": [
+        "cpp11"
+      ],
+      "Encoding": "UTF-8",
+      "RoxygenNote": "7.3.1",
+      "Config/testthat/edition": "3",
+      "NeedsCompilation": "yes",
+      "Author": "Thomas Lin Pedersen [cre, aut] (<https://orcid.org/0000-0002-5147-4711>)",
+      "Repository": "CRAN"
     },
     "tidyr": {
       "Package": "tidyr",
@@ -7983,6 +8745,52 @@
       "Author": "Hadley Wickham [aut], Lionel Henry [aut], Davis Vaughan [aut, cre], data.table team [cph] (Radix sort based on data.table's forder() and their contribution to R's order()), Posit Software, PBC [cph, fnd]",
       "Maintainer": "Davis Vaughan <davis@posit.co>",
       "Repository": "RSPM"
+    },
+    "viridis": {
+      "Package": "viridis",
+      "Version": "0.6.5",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Colorblind-Friendly Color Maps for R",
+      "Date": "2024-01-28",
+      "Authors@R": "c( person(\"Simon\", \"Garnier\", email = \"garnier@njit.edu\", role = c(\"aut\", \"cre\")), person(\"Noam\", \"Ross\", email = \"noam.ross@gmail.com\", role = c(\"ctb\", \"cph\")), person(\"Bob\", \"Rudis\", email = \"bob@rud.is\", role = c(\"ctb\", \"cph\")), person(\"Marco\", \"Sciaini\", email = \"sciaini.marco@gmail.com\", role = c(\"ctb\", \"cph\")), person(\"Antônio Pedro\", \"Camargo\", role = c(\"ctb\", \"cph\")), person(\"Cédric\", \"Scherer\", email = \"scherer@izw-berlin.de\", role = c(\"ctb\", \"cph\")) )",
+      "Maintainer": "Simon Garnier <garnier@njit.edu>",
+      "Description": "Color maps designed to improve graph readability for readers with  common forms of color blindness and/or color vision deficiency. The color  maps are also perceptually-uniform, both in regular form and also when  converted to black-and-white for printing. This package also contains  'ggplot2' bindings for discrete and continuous color and fill scales. A lean version of the package called 'viridisLite' that does not include the  'ggplot2' bindings can be found at  <https://cran.r-project.org/package=viridisLite>.",
+      "License": "MIT + file LICENSE",
+      "Encoding": "UTF-8",
+      "Depends": [
+        "R (>= 2.10)",
+        "viridisLite (>= 0.4.0)"
+      ],
+      "Imports": [
+        "ggplot2 (>= 1.0.1)",
+        "gridExtra"
+      ],
+      "Suggests": [
+        "hexbin (>= 1.27.0)",
+        "scales",
+        "MASS",
+        "knitr",
+        "dichromat",
+        "colorspace",
+        "httr",
+        "mapproj",
+        "vdiffr",
+        "svglite (>= 1.2.0)",
+        "testthat",
+        "covr",
+        "rmarkdown",
+        "maps",
+        "terra"
+      ],
+      "LazyData": "true",
+      "VignetteBuilder": "knitr",
+      "URL": "https://sjmgarnier.github.io/viridis/, https://github.com/sjmgarnier/viridis/",
+      "BugReports": "https://github.com/sjmgarnier/viridis/issues",
+      "RoxygenNote": "7.3.1",
+      "NeedsCompilation": "no",
+      "Author": "Simon Garnier [aut, cre], Noam Ross [ctb, cph], Bob Rudis [ctb, cph], Marco Sciaini [ctb, cph], Antônio Pedro Camargo [ctb, cph], Cédric Scherer [ctb, cph]",
+      "Repository": "CRAN"
     },
     "viridisLite": {
       "Package": "viridisLite",
