@@ -77,7 +77,14 @@ distance-to-TSS bar charts, Manhattan plots, circos plots.
 Threshold: padj <= 0.05 (no FC filter).
 Outputs: results/Script3_ATAC_visualisation/
 
-### Script 4: Integration Visualisation (coming soon)
+### Script 4: Integration Visualisation
+File: scripts/Script4_integration_visualisation.R
+Purpose: Generates all integration visualisations from Script 2
+output. Plots: heatmaps, scatter plots, volcano plots,
+Venn diagrams, distance histograms, GO/KEGG enrichment,
+protein interaction networks.
+Threshold: padj <= 0.05 (no FC filter).
+Outputs: results/Script4_integration_visualisation/
 
 ## Reproducibility
 Session information and MD5 checksums for each script run
