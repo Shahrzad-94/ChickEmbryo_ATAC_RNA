@@ -26,3 +26,4 @@ My own R scripts with Claude/
 # OS files
 .DS_Store
 Thumbs.db
+.Rproj.user
